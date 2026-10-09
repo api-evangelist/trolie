@@ -1,0 +1,285 @@
+generated: '2026-10-09'
+method: derived
+status: candidate
+source: 'Derived from openapi/trolie-openapi.yml (TROLIE 1.1.0, 28 operations; original captured from https://trolie.energy/openapi-1.0.yaml).
+  No official MCP server found: https://trolie.energy/.well-known/mcp.json and /llms.txt returned 404 (2026-10-09); github.com/trolie
+  repos are spec, java-client-sdk and conformance only; web search for a TROLIE MCP server found nothing.'
+server:
+  name: trolie
+  transport: null
+  url: null
+auth:
+  methods:
+  - oauth2
+  oauth2:
+    flow: clientCredentials
+    scheme: oauth2-primary-flow
+    note: RFC8725 JWT tokens per spec; each implementing entity runs its own authorization server.
+tool_count: 28
+tools:
+- name: get_limits_forecast_snapshot
+  category: Forecasting
+  description: Limits Forecast Snapshot
+  operationId: getLimitsForecastSnapshot
+  method: GET
+  path: /limits/forecast-snapshot
+  scopes:
+  - read:operating-snapshot
+  read_only: true
+- name: get_historical_limits_forecast_snapshot
+  category: Forecasting
+  description: Historical Limits Forecast Snapshot
+  operationId: getHistoricalLimitsForecastSnapshot
+  method: GET
+  path: /limits/forecast-snapshot/{period}
+  scopes:
+  - read:operating-snapshot
+  read_only: true
+- name: get_regional_limits_forecast_snapshot
+  category: Forecasting
+  description: Regional Limits Forecast Snapshot
+  operationId: getRegionalLimitsForecastSnapshot
+  method: GET
+  path: /limits/regional/forecast-snapshot
+  scopes:
+  - read:regional-operating-snapshot
+  read_only: true
+- name: post_regional_limits_forecast_snapshot
+  category: Forecasting
+  description: Update Regional Limits Forecast Snapshot
+  operationId: postRegionalLimitsForecastSnapshot
+  method: POST
+  path: /limits/regional/forecast-snapshot
+  scopes:
+  - write:regional-operating-snapshot
+  read_only: false
+- name: get_real_time_proposal_status
+  category: Real-Time
+  description: Real-Time Proposals Status
+  operationId: getRealTimeProposalStatus
+  method: GET
+  path: /rating-proposals/realtime
+  scopes:
+  - read:realtime-proposals
+  read_only: true
+- name: post_real_time_proposal
+  category: Real-Time
+  description: Submit Real-Time Rating Proposal
+  operationId: postRealTimeProposal
+  method: POST
+  path: /rating-proposals/realtime
+  scopes:
+  - write:realtime-proposals
+  read_only: false
+- name: get_real_time_limits
+  category: Real-Time
+  description: Limits Real Time Snapshot
+  operationId: getRealTimeLimits
+  method: GET
+  path: /limits/realtime-snapshot
+  scopes:
+  - read:operating-snapshot
+  read_only: true
+- name: get_regional_real_time_limits
+  category: Real-Time
+  description: Regional Limits Real Time Snapshot
+  operationId: getRegionalRealTimeLimits
+  method: GET
+  path: /limits/regional/realtime-snapshot
+  scopes:
+  - read:operating-snapshot
+  read_only: true
+- name: get_rating_forecast_proposal_status
+  category: Forecasting
+  description: Obtain forecast proposal status
+  operationId: getRatingForecastProposalStatus
+  method: GET
+  path: /rating-proposals/forecast
+  scopes:
+  - read:forecast-proposals
+  read_only: true
+- name: patch_rating_forecast_proposal
+  category: Forecasting
+  description: Submit a Forecast Proposal
+  operationId: patchRatingForecastProposal
+  method: PATCH
+  path: /rating-proposals/forecast
+  scopes:
+  - write:forecast-proposals
+  read_only: false
+- name: get_seasonal_ratings_snapshot
+  category: Seasonal
+  description: Get Seasonal Ratings
+  operationId: getSeasonalRatingsSnapshot
+  method: GET
+  path: /seasonal-ratings/snapshot
+  scopes:
+  - read:operating-snapshot
+  read_only: true
+- name: get_seasonal_rating_proposal_status
+  category: Seasonal
+  description: Obtain seasonal rating proposal status
+  operationId: getSeasonalRatingProposalStatus
+  method: GET
+  path: /rating-proposals/seasonal
+  scopes:
+  - read:seasonal-proposals
+  read_only: true
+- name: patch_seasonal_ratings_proposal
+  category: Seasonal
+  description: Submit a Seasonal Ratings proposal
+  operationId: patchSeasonalRatingsProposal
+  method: PATCH
+  path: /rating-proposals/seasonal
+  scopes:
+  - write:seasonal-proposals
+  read_only: false
+- name: get_seasonal_overrides
+  category: Seasonal Overrides
+  description: Get Seasonal Overrides
+  operationId: getSeasonalOverrides
+  method: GET
+  path: /seasonal-overrides
+  scopes:
+  - read:seasonal-overrides
+  read_only: true
+- name: create_seasonal_override
+  category: Seasonal Overrides
+  description: Create a new seasonal override
+  operationId: createSeasonalOverride
+  method: POST
+  path: /seasonal-overrides
+  scopes:
+  - write:seasonal-overrides
+  read_only: false
+- name: get_seasonal_override
+  category: Seasonal Overrides
+  description: Obtain a specific temporary seasonal rating by Id.
+  operationId: getSeasonalOverride
+  method: GET
+  path: /seasonal-overrides/{id}
+  scopes:
+  - read:seasonal-overrides
+  read_only: true
+- name: delete_seasonal_override
+  category: Seasonal Overrides
+  description: Delete a specific seasonal override by its Id.
+  operationId: deleteSeasonalOverride
+  method: DELETE
+  path: /seasonal-overrides/{id}
+  scopes:
+  - write:seasonal-overrides
+  read_only: false
+- name: update_seasonal_override
+  category: Seasonal Overrides
+  description: Updates an existing Seasonal override
+  operationId: updateSeasonalOverride
+  method: PUT
+  path: /seasonal-overrides/{id}
+  scopes:
+  - write:seasonal-overrides
+  read_only: false
+- name: get_temporary_aar_exceptions
+  category: Temporary AAR Exceptions
+  description: Temporary AAR Exceptions
+  operationId: getTemporaryAARExceptions
+  method: GET
+  path: /temporary-aar-exceptions
+  scopes:
+  - read:temporary-aar-exceptions
+  read_only: true
+- name: create_temporary_aar_exception
+  category: Temporary AAR Exceptions
+  description: Create a new temporary AAR Exception
+  operationId: createTemporaryAARException
+  method: POST
+  path: /temporary-aar-exceptions
+  scopes:
+  - write:temporary-aar-exceptions
+  read_only: false
+- name: get_temporary_aar_exception
+  category: Temporary AAR Exceptions
+  description: Obtain a specific temporary AAR exception by Id.
+  operationId: getTemporaryAARException
+  method: GET
+  path: /temporary-aar-exceptions/{id}
+  scopes:
+  - read:temporary-aar-exceptions
+  read_only: true
+- name: delete_temporary_aar_exception
+  category: Temporary AAR Exceptions
+  description: Delete a specific temporary AAR Exception by Id.
+  operationId: deleteTemporaryAARException
+  method: DELETE
+  path: /temporary-aar-exceptions/{id}
+  scopes:
+  - write:temporary-aar-exceptions
+  read_only: false
+- name: update_temporary_aar_exception
+  category: Temporary AAR Exceptions
+  description: Updates an existing Temporary AAR Exception.
+  operationId: updateTemporaryAARException
+  method: PUT
+  path: /temporary-aar-exceptions/{id}
+  scopes:
+  - write:temporary-aar-exceptions
+  read_only: false
+- name: create_monitoring_set
+  category: Monitoring Sets
+  description: Create a new monitoring set
+  operationId: createMonitoringSet
+  method: POST
+  path: /monitoring-sets
+  scopes:
+  - write:monitoring-sets
+  read_only: false
+- name: get_monitoring_set
+  category: Monitoring Sets
+  description: Obtain a specific monitoring set by identifier.
+  operationId: getMonitoringSet
+  method: GET
+  path: /monitoring-sets/{id}
+  scopes:
+  - read:monitoring-sets
+  read_only: true
+- name: update_monitoring_set
+  category: Monitoring Sets
+  description: Update an existing monitoring set
+  operationId: updateMonitoringSet
+  method: PUT
+  path: /monitoring-sets/{id}
+  scopes:
+  - write:monitoring-sets
+  read_only: false
+- name: delete_monitoring_set
+  category: Monitoring Sets
+  description: Delete a specific monitoring set by its identifier
+  operationId: deleteMonitoringSet
+  method: DELETE
+  path: /monitoring-sets/{id}
+  scopes:
+  - write:monitoring-sets
+  read_only: false
+- name: get_default_monitoring_set
+  category: Monitoring Sets
+  description: Obtain your default monitoring set.
+  operationId: getDefaultMonitoringSet
+  method: GET
+  path: /default-monitoring-set
+  scopes:
+  - read:monitoring-sets
+  read_only: true
+notes: TROLIE is an open specification implemented by each Transmission Provider / Reliability Coordinator; there is no single
+  hosted API (servers[] is the placeholder https://trolie.example.com). These tools are a candidate binding of the spec operations,
+  not a shipped server.
+deployment:
+  mode: none
+  auth: oauth
+  verified: derived
+  checked: '2026-10-09'
+  probe:
+  - url: https://trolie.energy/.well-known/mcp.json
+    http_status: 404
+  - url: https://trolie.energy/llms.txt
+    http_status: 404
+  source: openapi/trolie-openapi.yml

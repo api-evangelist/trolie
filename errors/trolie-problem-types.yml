@@ -1,0 +1,104 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/trolie-openapi.yml
+format: rfc9457
+envelope:
+  media_type: application/*
+  schema: empty
+coverage:
+  operations: 28
+  statuses_declared: 13
+problems:
+- status: 400
+  title: Bad Request
+  description: Malformed request
+  operations: 28
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 28
+  media_types:
+  - application/*
+  schema: empty
+- status: 403
+  title: Forbidden
+  description: Access denied
+  operations: 28
+  media_types:
+  - application/*
+  schema: empty
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 20
+  media_types:
+  - application/*
+  schema: empty
+- status: 406
+  title: Not Acceptable
+  description: Not Acceptable (Content negotiation failed)
+  operations: 25
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 409
+  title: Conflict
+  description: Conflict
+  operations: 8
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 410
+  title: Gone
+  description: Gone. The requested resource is no longer available.  TROLIE
+  operations: 3
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 413
+  title: Content Too Large
+  description: Payload too large
+  operations: 10
+  media_types:
+  - application/*
+  schema: empty
+- status: 415
+  title: Unsupported Media Type
+  description: Unsupported media type
+  operations: 10
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 422
+  title: Unprocessable Content
+  description: Unprocessable content
+  operations: 13
+  media_types:
+  - application/problem+json
+  schema: problem
+- status: 429
+  title: Too Many Requests
+  description: Too many requests (rate limiting)
+  operations: 28
+  media_types:
+  - application/*
+  schema: empty
+- status: 500
+  title: Internal Server Error
+  description: An unexpected error occurred
+  operations: 28
+  media_types:
+  - application/*
+  schema: empty
+- status: default
+  title: null
+  description: An unexpected error occurred
+  operations: 28
+  media_types:
+  - application/*
+  schema: empty

@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/trolie/main/json-schema/trolie-real-time-proposal-status-schema.json",
+  "title": "real-time-proposal-status",
+  "description": "Status of the rating provider's real-time obligations.\nIncludes any validation errors encountered while processing proposals.\n",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/trolie-openapi.yml#/components/schemas/real-time-proposal-status",
+  "type": "object",
+  "properties": {
+    "incomplete-obligation-count": {
+      "description": "\nThe number of facilities for this provider whose Ratings Obligation has\nnot been met in this forecast window. This number may be larger than the\nsize of `incomplete-obligations`, since the latter has a pre-defined\nupper bound for performance and application security reasons.\n\nThe Ratings Provider should check that this value is zero when they\nbelieve they have completed their submission process.\n",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0,
+      "maximum": 50000
+    },
+    "incomplete-obligations": {
+      "type": "array",
+      "description": "\nIndicates which Ratings Obligations have not been fulfilled. The size of\nthis set is bounded and may be less than the actual count of unfulfilled\nObligations indicated in `incomplete-obligation-count`. The intended use\ncase for this set is debugging and troubleshooting.\n",
+      "minItems": 0,
+      "maxItems": 50000,
+      "items": {
+        "$ref": "#/$defs/names"
+      }
+    },
+    "invalid-proposal-count": {
+      "description": "\nThe number of `resource-forecast-proposal` objects that have been\ndetermined to be *invalid* during this Forecast Window for the current\nRatings Provider. This count is provided for troubleshooting,\nestablishing trends, and triggering alerts.\n",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0,
+      "maximum": 50000
+    },
+    "proposal-validation-errors": {
+      "type": "array",
+      "description": "The most recent validation errors",
+      "minItems": 0,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Validation errors.\n\nNote to implementors, the property `resource-id` intentionally is not `names`\nas was used in `incomplete-obligations` to mitigate the\npossibility of information disclosure when a Ratings Provider\nsubmits a proposal for a valid resource that they are not\npermitted to write to. It should be the same `resource-id` that\nthe client submitted.\n",
+        "properties": {
+          "message": {
+            "type": "string",
+            "pattern": "^(.){1,500}$",
+            "maxLength": 500
+          },
+          "resource-id": {
+            "$ref": "#/$defs/resource-id"
+          }
+        }
+      }
+    },
+    "source": {
+      "$ref": "#/$defs/data-provenance"
+    }
+  },
+  "required": [
+    "source",
+    "incomplete-obligation-count",
+    "incomplete-obligations",
+    "invalid-proposal-count",
+    "proposal-validation-errors"
+  ],
+  "$defs": {
+    "data-provenance": {
+      "type": "object",
+      "description": "\nProvides information about where the associated representation came from. *No\nfunctional aspects of the exchange are contingent upon this data.* However,\nthis information is meant to support debugging and application support use\ncases, so implementors are encouraged to provide\nmeaningful values.\n\n* `provider` identifies that entity, e.g., a Ratings Provider or Clearinghouse\n  Provider, that created the object. The `provider`'s NERC id is recommended.\n* `last-updated` indicates the wall-clock time at the `provider` when the\n  object was last modified. N.b. this is not when the message\n  describing the object was sent or received, i.e., implementors should not\n  simply insert the current timestamp here when preparing the object serialization.\n* `origin-id` is the identifier used by the `provider` to uniquely nominate\n  the object. It is recommended but not required that this be a URI.\n",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/entity"
+        },
+        "last-updated": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "origin-id": {
+          "$ref": "#/$defs/local"
+        }
+      },
+      "required": [
+        "provider",
+        "last-updated"
+      ]
+    },
+    "entity": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for an entity, such as a grid operator or\norganization. This identifier is typically used in the context of data\nexchange between entities.\n"
+    },
+    "local": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a identifier that is unique for an object in the context of an\nexchange between two grid operators.\n"
+    },
+    "name-type": {
+      "description": "Type of the name being referenced.  Corresponds to the IEC CIM `NameType` concept.",
+      "type": "string",
+      "maxLength": 20,
+      "pattern": "^[A-Za-z0-9\\-]{3,20}$"
+    },
+    "names": {
+      "type": "object",
+      "properties": {
+        "resource-id": {
+          "$ref": "#/$defs/resource-id"
+        },
+        "alternate-identifiers": {
+          "type": "array",
+          "maxItems": 10,
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/local"
+              },
+              "type": {
+                "$ref": "#/$defs/name-type"
+              },
+              "authority": {
+                "$ref": "#/$defs/entity"
+              },
+              "mrid": {
+                "$ref": "#/$defs/local"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "resource-id"
+      ]
+    },
+    "resource-id": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for a power system resource, such as a\ntransmission facility, segment, interface, etc. This identifier is typically\nused between reliability coordinators in operations.\n"
+    },
+    "timestamp": {
+      "description": "RFC 3339 date-time string with a maximum of 10 digits in the fractional seconds component, i.e., nanosecond precision.",
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 35
+    }
+  }
+}

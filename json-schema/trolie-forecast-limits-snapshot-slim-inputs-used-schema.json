@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/trolie/main/json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json",
+  "title": "forecast-limits-snapshot-slim-inputs-used",
+  "description": "A slim snapshot of the forecast for a monitoring set, including the inputs\nthat were used to determine the continuous limits.\n",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/trolie-openapi.yml#/components/schemas/forecast-limits-snapshot-slim-inputs-used",
+  "type": "object",
+  "properties": {
+    "snapshot-header": {
+      "$ref": "#/$defs/forecast-snapshot-slim-header"
+    },
+    "limits": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50000,
+      "description": "Set of forecast limits",
+      "items": {
+        "$ref": "#/$defs/resource-forecast-proposal-slim"
+      }
+    },
+    "inputs-used": {
+      "description": "\nOptional list of quantities used as input to the ratings determination.\nThe particular information exchange determines which values may be expected\nas well as the conventions used to represent those values. This property\nis included to prescribe a way to include these inputs.\n",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "free-text",
+            "maxLength": 50
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50000,
+            "description": "Since this is expected to be used for wind speed or temperature,\nwe expect an array of numbers for each resource. An empty array\nis used to indicate that the inputs are not available for a\nparticular resource. This could occur if the inputs were not provided\nby the Ratings Provider or if a recourse rating was utilized.\n",
+            "items": {
+              "$ref": "#/$defs/resource-forecast-inputs"
+            }
+          },
+          "unit": {
+            "$ref": "#/$defs/unit"
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "unit"
+        ]
+      }
+    }
+  },
+  "required": [
+    "snapshot-header",
+    "limits"
+  ],
+  "$defs": {
+    "data-provenance": {
+      "type": "object",
+      "description": "\nProvides information about where the associated representation came from. *No\nfunctional aspects of the exchange are contingent upon this data.* However,\nthis information is meant to support debugging and application support use\ncases, so implementors are encouraged to provide\nmeaningful values.\n\n* `provider` identifies that entity, e.g., a Ratings Provider or Clearinghouse\n  Provider, that created the object. The `provider`'s NERC id is recommended.\n* `last-updated` indicates the wall-clock time at the `provider` when the\n  object was last modified. N.b. this is not when the message\n  describing the object was sent or received, i.e., implementors should not\n  simply insert the current timestamp here when preparing the object serialization.\n* `origin-id` is the identifier used by the `provider` to uniquely nominate\n  the object. It is recommended but not required that this be a URI.\n",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/entity"
+        },
+        "last-updated": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "origin-id": {
+          "$ref": "#/$defs/local"
+        }
+      },
+      "required": [
+        "provider",
+        "last-updated"
+      ]
+    },
+    "emergency-durations": {
+      "type": "array",
+      "description": "Defines the durations in minutes used for emergency limits.",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "A type of limit as defined in the Transmission Provider's operating manual,\nusually indicating specific scenarios under which the limit may be used as\nwell as a maximum period for which the limit may be safely applied.\n",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^[A-Za-z\\-]{3,10}$"
+          },
+          "duration-minutes": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          }
+        },
+        "required": [
+          "name",
+          "duration-minutes"
+        ]
+      }
+    },
+    "entity": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for an entity, such as a grid operator or\norganization. This identifier is typically used in the context of data\nexchange between entities.\n"
+    },
+    "forecast-snapshot-slim-header": {
+      "description": "Details about the snapshot provided by the Clearinghouse provider.",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/data-provenance"
+        },
+        "default-emergency-durations": {
+          "$ref": "#/$defs/emergency-durations"
+        },
+        "default-limiting-analysis": {
+          "$ref": "#/$defs/limiting-analysis"
+        },
+        "begins": {
+          "description": "\nRFC 3339 date-time string with *no fractional seconds component* that\nNominates the operational window of this snapshot.\n",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 25
+        },
+        "power-system-resources": {
+          "$ref": "#/$defs/named-power-system-resources"
+        },
+        "ends": {
+          "description": "\nRFC 3339 date-time string with *no fractional seconds component* that\nindicates that last period for each individual resource proposal,\nidentifying the appropriate operational window for this proposal.\n",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 25
+        }
+      },
+      "required": [
+        "begins",
+        "ends",
+        "source",
+        "power-system-resources",
+        "default-emergency-durations"
+      ]
+    },
+    "limiting-analysis": {
+      "type": "string",
+      "description": "\nIndicates how a operating limit was determined. This is used to\nprovide context for the ratings proposals and limits snapshots. When defined\nin the header, this is assumed to apply to any limit that does not specify its\nown limiting analysis. When defined for a period, it applies to the\n`continuous-operating-limit` as well as the associated\n`emergency-operating-limits`, unless the `emergency-operating-limits` specify\ntheir own limiting analysis.\n\nTHERMAL_RATING - The limit was determined by the thermal rating of underlying\nequipment.\n\nTRANSIENT_SECURITY_ASSESSMENT - Studies of the system's transient stability\ndetermined the limit.\n\nVOLTAGE_SECURITY_ASSESSMENT - Studies of the system's voltage stability\ndetermined the limit.\n\nSMALL_SIGNAL_STABILITY_ASSESSMENT - Small-signal stability studies determined\nthe limit.\n\nSYSTEM_SPECIFIC - This could account for limits imposed by specific system\ncharacteristics, such as the presence of sensitive loads, the need to maintain\nspecific power flows, or other reliability/volatility reasons. These include\nlimits defined by Special Protection Schemes and Remedial Action Schemes.\n\nENVIRONMENTAL_CONDITIONS - The limit was determined by exceptional\nenvironmental conditions such as wildfire risk, ice loading, excessive\nwind/galloping, or other factors.\n\nCONTRACT_CAPACITY - The available facility transfer capacity is limited\nby contractual obligations.\n\nREGULATORY_REQUIREMENTS - The limit is imposed by regulatory requirements.\n\nOTHER - The limit was determined by some other means not anticipated in this\nstandard.\n",
+      "enum": [
+        "THERMAL_RATING",
+        "TRANSIENT_SECURITY_ASSESSMENT",
+        "VOLTAGE_SECURITY_ASSESSMENT",
+        "SMALL_SIGNAL_STABILITY_ASSESSMENT",
+        "SYSTEM_SPECIFIC",
+        "ENVIRONMENTAL_CONDITIONS",
+        "REGULATORY_REQUIREMENTS",
+        "CONTRACT_CAPACITY",
+        "OTHER"
+      ]
+    },
+    "local": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a identifier that is unique for an object in the context of an\nexchange between two grid operators.\n"
+    },
+    "name-type": {
+      "description": "Type of the name being referenced.  Corresponds to the IEC CIM `NameType` concept.",
+      "type": "string",
+      "maxLength": 20,
+      "pattern": "^[A-Za-z0-9\\-]{3,20}$"
+    },
+    "named-power-system-resources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50000,
+      "description": "Collection of power system resource names",
+      "items": {
+        "$ref": "#/$defs/names"
+      }
+    },
+    "names": {
+      "type": "object",
+      "properties": {
+        "resource-id": {
+          "$ref": "#/$defs/resource-id"
+        },
+        "alternate-identifiers": {
+          "type": "array",
+          "maxItems": 10,
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/local"
+              },
+              "type": {
+                "$ref": "#/$defs/name-type"
+              },
+              "authority": {
+                "$ref": "#/$defs/entity"
+              },
+              "mrid": {
+                "$ref": "#/$defs/local"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "resource-id"
+      ]
+    },
+    "resource-forecast-inputs": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "number",
+        "format": "float"
+      }
+    },
+    "resource-forecast-proposal-slim": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "$ref": "#/$defs/slim"
+      }
+    },
+    "resource-id": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for a power system resource, such as a\ntransmission facility, segment, interface, etc. This identifier is typically\nused between reliability coordinators in operations.\n"
+    },
+    "slim": {
+      "type": "array",
+      "title": "Slim Period",
+      "minItems": 1,
+      "maxItems": 11,
+      "items": {
+        "type": "number"
+      }
+    },
+    "timestamp": {
+      "description": "RFC 3339 date-time string with a maximum of 10 digits in the fractional seconds component, i.e., nanosecond precision.",
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 35
+    },
+    "unit": {
+      "type": "string",
+      "description": "If the `value` is dimensionless, this property should not be\nprovided. Since we are not specifying which inputs shall be\nprovided, we cannot specify a definitive list of units, but\nimplementors are encouraged to use UnitSymbol from CIM when\nappropriate: The CIM may not include appropriate units for\nall inputs, e.g., wind speed, degrees Fahrenheit, etc.\n",
+      "format": "unit",
+      "maxLength": 50
+    }
+  }
+}

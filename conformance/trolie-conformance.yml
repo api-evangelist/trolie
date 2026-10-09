@@ -1,0 +1,36 @@
+generated: '2026-10-09'
+method: searched
+source: https://trolie.energy/spec-1.0
+standards:
+- id: oauth2
+  conforms: true
+  evidence: openapi/trolie-openapi.yml components.securitySchemes.oauth2-primary-flow (clientCredentials flow, 15 scopes), applied as global security.
+- id: rfc8725
+  conforms: true
+  evidence: 'openapi/trolie-openapi.yml components.securitySchemes.oauth2-primary-flow.description: "Support RFC8725 JWT tokens."'
+- id: rfc7807
+  conforms: true
+  evidence: openapi/trolie-openapi.yml components.responses 400-problem, 406-problem, 409, 410-problem, 415-problem, 422-problem use content type
+    application/problem+json.
+- id: rfc9110-conditional-get
+  conforms: true
+  evidence: '"TROLIE implementations MUST support the Conditional GET pattern" (https://trolie.energy/articles/conditional-GET); spec defines
+    ETag header, If-None-Match and 304 response.'
+- id: ferc-order-881
+  conforms: true
+  evidence: 'Spec info.description: "it is designed to support the exchange of Ambient Adjusted Ratings (AARs), pursuant to FERC Order 881. It
+    is published as a community standard to facilitate interoperability in these exchanges." The project also publishes a conformance suite (https://github.com/trolie/conformance)
+    for implementations.'
+  kind: domain_standard
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.3
+- id: rfc9457
+  conforms: true
+  evidence: application/problem+json on 87 response(s), e.g. GET /limits/forecast-snapshot 400
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: ratelimit-headers
+  conforms: true
+  evidence: responses declare Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset

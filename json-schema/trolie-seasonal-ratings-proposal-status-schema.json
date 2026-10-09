@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/trolie/main/json-schema/trolie-seasonal-ratings-proposal-status-schema.json",
+  "title": "seasonal-ratings-proposal-status",
+  "description": "Seasonal rating proposal status",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/trolie-openapi.yml#/components/schemas/seasonal-ratings-proposal-status",
+  "type": "object",
+  "properties": {
+    "incomplete-obligation-count": {
+      "description": "\nThe number of facilities for this provider whose Ratings Obligation has\nnot been met in this forecast window. This number may be larger than the\nsize of `incomplete-obligations`, since the latter has a pre-defined\nupper bound for performance and application security reasons.\n\nThe Ratings Provider should check that this value is zero when they\nbelieve they have completed their submission process.\n",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0,
+      "maximum": 50000
+    },
+    "incomplete-obligations": {
+      "type": "array",
+      "description": "\nIndicates which Seasonal Ratings Obligations have not been fulfilled.\nThe size of this set is bounded and may be less than the actual count of\nunfulfilled Obligations indicated in `incomplete-obligation-count`.\n",
+      "minItems": 0,
+      "maxItems": 50000,
+      "items": {
+        "$ref": "#/$defs/missing-seasonal-obligation"
+      }
+    },
+    "invalid-proposal-count": {
+      "description": "\nThe number of `resource-forecast-proposal` objects that have been\ndetermined to be *invalid* during this Forecast Window for the current\nRatings Provider. This count is provided for troubleshooting,\nestablishing trends, and triggering alerts.\n",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0,
+      "maximum": 50000
+    },
+    "proposal-validation-errors": {
+      "type": "array",
+      "description": "The most recent validation errors",
+      "minItems": 0,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Validation errors.\n\nNote to implementors, the property `resource-id` intentionally is not `names`\nas was used in `incomplete-obligations` to mitigate the\npossibility of information disclosure when a Ratings Provider\nsubmits a proposal for a valid resource that they are not\npermitted to write to. It should be the same `resource-id` that\nthe client submitted.\n",
+        "properties": {
+          "message": {
+            "type": "string",
+            "pattern": "^(.){1,500}$",
+            "maxLength": 500
+          },
+          "resource-id": {
+            "$ref": "#/$defs/resource-id"
+          }
+        }
+      }
+    },
+    "source": {
+      "$ref": "#/$defs/data-provenance"
+    }
+  },
+  "required": [
+    "source",
+    "incomplete-obligation-count",
+    "invalid-proposal-count"
+  ],
+  "$defs": {
+    "data-provenance": {
+      "type": "object",
+      "description": "\nProvides information about where the associated representation came from. *No\nfunctional aspects of the exchange are contingent upon this data.* However,\nthis information is meant to support debugging and application support use\ncases, so implementors are encouraged to provide\nmeaningful values.\n\n* `provider` identifies that entity, e.g., a Ratings Provider or Clearinghouse\n  Provider, that created the object. The `provider`'s NERC id is recommended.\n* `last-updated` indicates the wall-clock time at the `provider` when the\n  object was last modified. N.b. this is not when the message\n  describing the object was sent or received, i.e., implementors should not\n  simply insert the current timestamp here when preparing the object serialization.\n* `origin-id` is the identifier used by the `provider` to uniquely nominate\n  the object. It is recommended but not required that this be a URI.\n",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/entity"
+        },
+        "last-updated": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "origin-id": {
+          "$ref": "#/$defs/local"
+        }
+      },
+      "required": [
+        "provider",
+        "last-updated"
+      ]
+    },
+    "entity": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for an entity, such as a grid operator or\norganization. This identifier is typically used in the context of data\nexchange between entities.\n"
+    },
+    "local": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a identifier that is unique for an object in the context of an\nexchange between two grid operators.\n"
+    },
+    "missing-seasonal-obligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resource-id": {
+          "$ref": "#/$defs/resource-id"
+        },
+        "obligation-period-begins": {
+          "$ref": "#/$defs/period-start"
+        },
+        "obligation-period-ends": {
+          "$ref": "#/$defs/period-start"
+        },
+        "periods": {
+          "description": "\nDefines the seasonal ratings schedule adopted in this proposal. Each season\nis given a `season-name` with the beginning of the season starting on\n`begins` and ending on the `begins` of the next season chronologically. \n\nIt is required that the seasons are listed chronologically.\n",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 240,
+          "items": {
+            "$ref": "#/$defs/season"
+          }
+        }
+      }
+    },
+    "period-start": {
+      "description": "\nRFC 3339 date-time string with *no fractional seconds component* that\ndesignates a start or end to an operating period (such as an hour) that starts\nat a specified time. This will frequently be at the start of an hour, but may\nbe finer-grained, such as every 30 minutes, should the Clearinghouse Provider\nchoose.\n\nIf the Transmission Provider is operating in EST, these are valid and\nequivalent values:\n\n* 2023-01-01T06:00Z\n* 2023-01-01T01:00-5:00\n* 2023-01-01T00:00-6:00\n* 2023-01-01T11:30+5:30\n\nThe server should uniformly represent date-times in the operational time zone\nof the Clearinghouse Provider.\n",
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 25
+    },
+    "resource-id": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for a power system resource, such as a\ntransmission facility, segment, interface, etc. This identifier is typically\nused between reliability coordinators in operations.\n"
+    },
+    "season": {
+      "type": "object",
+      "properties": {
+        "season-name": {
+          "$ref": "#/$defs/season-name"
+        },
+        "begins": {
+          "$ref": "#/$defs/period-start"
+        }
+      },
+      "required": [
+        "season-name",
+        "begins"
+      ]
+    },
+    "season-name": {
+      "type": "string",
+      "description": "A name for the season",
+      "maxLength": 255,
+      "pattern": "\\w+"
+    },
+    "timestamp": {
+      "description": "RFC 3339 date-time string with a maximum of 10 digits in the fractional seconds component, i.e., nanosecond precision.",
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 35
+    }
+  }
+}

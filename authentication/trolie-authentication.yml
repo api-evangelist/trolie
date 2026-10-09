@@ -1,0 +1,29 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/trolie/java-client-sdk
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oauth2-primary-flow
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://no-server/oauth2
+    scopes: 15
+  description: Support RFC8725 JWT tokens.
+  sources:
+  - openapi/trolie-openapi.yml
+docs: https://trolie.energy/spec-1.0
+docs_additional:
+- https://github.com/trolie/java-client-sdk#connecting-to-spp-trolie-spp-two-factor-authentication
+notes:
+- The spec tokenUrl is the placeholder https://no-server/oauth2; each implementing
+  RC/TP operates its own authorization server.
+- 'Implementation-specific: the Java Client SDK README documents built-in support
+  for SPP (Southwest Power Pool) Two-Factor Authentication, which requires signing
+  every outbound request with a custom X-SPP-API-Token header using HTTP request metadata
+  (path, timestamp, nonce, and screen name) signed with an HMAC-SHA512 key, per SPP
+  TFA Technical Specifications v1.4.'

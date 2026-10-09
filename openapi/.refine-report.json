@@ -1,0 +1,33 @@
+{
+  "provider": "trolie",
+  "sources": [
+    "_original/trolie-openapi-1.0.yaml",
+    "trolie-openapi.yml"
+  ],
+  "outputs": [
+    "trolie-forecasting-api-openapi.yml",
+    "trolie-monitoring-sets-api-openapi.yml",
+    "trolie-real-time-api-openapi.yml",
+    "trolie-seasonal-api-openapi.yml",
+    "trolie-seasonal-overrides-api-openapi.yml",
+    "trolie-temporary-aar-exceptions-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/trolie-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "trolie-openapi-1.0.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "trolie-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Forecasting' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "tag 'Monitoring Sets' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "tag 'Real-Time' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "tag 'Seasonal' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "tag 'Seasonal Overrides' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "tag 'Temporary AAR Exceptions' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+6 apis, 6 total)"
+  ],
+  "skipped": []
+}

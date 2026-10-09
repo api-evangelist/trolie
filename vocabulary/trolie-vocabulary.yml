@@ -1,0 +1,454 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/trolie-openapi.yml
+vocabulary:
+  name: TROLIE Domain Vocabulary
+  description: 'Terms declared by TROLIE''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: Real-Time
+    definition: If permitted by the Clearinghouse Provider, its Ratings Providers can use these functions to exchange real-time ratings, supplementing
+      or replacing traditional telemetry protocols like ICCP. These ratings are based on real-time measurements of ambient conditions and will
+      be used by Transmission Providers for real-time grid operations processes, including state estimation and real-time markets. The
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: Forecasting
+    definition: The Forecasting API operations define the exchange of forecasted ratings, including the 240-hour-ahead forecasted AAR data exchange
+      required by FERC Order 881. The operations support submitting rating proposals, querying in-use limits, and monitoring the health and validity
+      of submissions against the Rating Provider's obligations.
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: Seasonal
+    definition: Seasonal ratings are static ratings associated with extended durations, typically months. These are typically used in both planning
+      and operations. Power system resources that are exempt from providing AARs generally operate at a seasonal rating. Even for resources using
+      dynamic ratings, a seasonal rating is still necessary. This acts as a recourse when a dynamic rating is unavailable. For example
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: Seasonal Overrides
+    definition: A Seasonal Override instructs the system to use a temporary static rating instead of any concurrent Seasonal Rating for a resource.
+      A typical use case is a so-called 'de-rate' due to a temporary clearance issue for a transmission facility that is exempt from providing
+      AARs. Exempt facilities typically operate at a seasonal rating. However, instead of updating the seasonal rating schedule, a Rating
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: Temporary AAR Exceptions
+    definition: 'A [Temporary AAR Exception](https://trolie.energy/concepts#temporary-aar-exception) is provided by the Ratings Provider when
+      a Ratings Obligation cannot be fulfilled, due to some temporary operating condition impacting the related power system resource. This could
+      occur in various scenarios: * An equipment failure. * An unforeseen condition on a related part of the power grid. * Some ambient condi'
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: Monitoring Sets
+    definition: '[Monitoring Sets](https://trolie.energy/concepts#monitoring-sets) are named sets of power system resources that may be used to
+      filter ratings and limits returned by queries against these APIs. How Monitoring Sets are defined is beyond the scope of the TROLIE specification,
+      and it is assumed that the sender and receiver have predefined the appropriate Monitoring Sets.'
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: limit-type
+    definition: ''
+    tags:
+    - Resource Group
+    source: openapi/trolie-openapi.yml
+  - term: empty
+    definition: Intended to proactively avoid information disclosure
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/empty
+  - term: problem
+    definition: See [RFC9457](https://www.rfc-editor.org/rfc/rfc9457#appendix-A).
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/problem
+  - term: period-start
+    definition: RFC 3339 date-time string with *no fractional seconds component* that designates a start or end to an operating period (such as
+      an hour) that starts at a specified time. This will frequently be at the start of an hour, but may be finer-grained, such as every 30 minutes,
+      should the Clearinghouse Provider choose. If the Transmission Provider is operating in EST, these are valid and equivalent values
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/period-start
+  - term: local
+    definition: Contains a identifier that is unique for an object in the context of an exchange between two grid operators.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/local
+  - term: resource-id
+    definition: Contains a unique identifier for a power system resource, such as a transmission facility, segment, interface, etc. This identifier
+      is typically used between reliability coordinators in operations.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/resource-id
+  - term: entity
+    definition: Contains a unique identifier for an entity, such as a grid operator or organization. This identifier is typically used in the
+      context of data exchange between entities.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/entity
+  - term: timestamp
+    definition: RFC 3339 date-time string with a maximum of 10 digits in the fractional seconds component, i.e., nanosecond precision.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/timestamp
+  - term: data-provenance
+    definition: Provides information about where the associated representation came from. *No functional aspects of the exchange are contingent
+      upon this data.* However, this information is meant to support debugging and application support use cases, so implementors are encouraged
+      to provide meaningful values. * `provider` identifies that entity, e.g., a Ratings Provider or Clearinghouse Provider, that created t
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/data-provenance
+  - term: emergency-durations
+    definition: Defines the durations in minutes used for emergency limits.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/emergency-durations
+  - term: limiting-analysis
+    definition: Indicates how a operating limit was determined. This is used to provide context for the ratings proposals and limits snapshots.
+      When defined in the header, this is assumed to apply to any limit that does not specify its own limiting analysis. When defined for a period,
+      it applies to the `continuous-operating-limit` as well as the associated `emergency-operating-limits`, unless the `emergency-opera
+    tags:
+    - Enumeration
+    source: openapi/trolie-openapi.yml#/components/schemas/limiting-analysis
+  - term: name-type
+    definition: Type of the name being referenced. Corresponds to the IEC CIM `NameType` concept.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/name-type
+  - term: names
+    definition: 'Object declared by the contract with fields: resource-id, alternate-identifiers.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/names
+  - term: named-power-system-resources
+    definition: Collection of power system resource names
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/named-power-system-resources
+  - term: forecast-snapshot-header
+    definition: Details about the snapshot provided by the Clearinghouse provider.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-snapshot-header
+  - term: Active Power
+    definition: 'Object declared by the contract with fields: mw, kV.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/active-power
+  - term: Active Power and Power Factor
+    definition: 'Object declared by the contract with fields: mw, kV, pf.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/active-power-with-power-factor
+  - term: Apparent Power
+    definition: 'Object declared by the contract with fields: mva, kV.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/apparent-power
+  - term: Current
+    definition: Representation of a thermal limit in amperes.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/current
+  - term: Reactive Power
+    definition: Representation of a limit in megavolt-amperes reactive (MVAR).
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/reactive-power
+  - term: Overvoltage Threshold per unit
+    definition: An upper limit to voltage for a transmission facility in per unit with the base voltage assumed to be the nominal voltage.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/overvoltage-threshold-pu
+  - term: Overvoltage Threshold
+    definition: An upper limit to voltage for a transmission facility in kilovolts.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/overvoltage-threshold
+  - term: Undervoltage Threshold per unit
+    definition: An lower limit to voltage for a transmission facility in per unit with the nominal voltage assumed to be the base voltage.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/undervoltage-threshold-pu
+  - term: Undervoltage Threshold
+    definition: A lower limit to voltage for a transmission facility in kilovolts.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/undervoltage-threshold
+  - term: Limit
+    definition: Defines the limit. In practice most exchanges will only support one kind of limit for proposals and snapshots. However, the specification
+      supports defining limits on a per resource basis as well as limit types that are not anticipated to be used to implement Order 881. TROLIE
+      server implementations must support at least one of these limit types and should return a well known `application/problem+j
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/limit
+  - term: limit-value-set
+    definition: A set of general limit or rating values, each mapped to the various limit bands defined by the Transmission Provider's operating
+      manual. This typically consists of a "normal" limit, as well as limits for various levels of emergency conditions (typically 2-4) defined
+      in the operations manual.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/limit-value-set
+  - term: forecast-snapshot
+    definition: 'Object declared by the contract with fields: period-start, period-end, continuous-operating-limit, emergency-operating-limits,
+      limiting-analysis.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-snapshot
+  - term: forecast-limit-item
+    definition: 'Object declared by the contract with fields: resource-id, periods.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limit-item
+  - term: forecast-limits-snapshot
+    definition: A snapshot of the forecast for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-snapshot
+  - term: forecast-snapshot-header-elide-psr
+    definition: Details about the snapshot provided by the Clearinghouse provider. The `power-system-resources` property is omitted from this
+      header.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-snapshot-header-elide-psr
+  - term: forecast-limits-snapshot-elide-psr
+    definition: A snapshot of the forecast for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-snapshot-elide-psr
+  - term: forecast-snapshot-slim-header
+    definition: Details about the snapshot provided by the Clearinghouse provider.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-snapshot-slim-header
+  - term: forecast-limits-snapshot-slim
+    definition: A slim snapshot of the forecast for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-snapshot-slim
+  - term: unit
+    definition: 'If the `value` is dimensionless, this property should not be provided. Since we are not specifying which inputs shall be provided,
+      we cannot specify a definitive list of units, but implementors are encouraged to use UnitSymbol from CIM when appropriate: The CIM may not
+      include appropriate units for all inputs, e.g., wind speed, degrees Fahrenheit, etc.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/unit
+  - term: forecast-limits-snapshot-slim-inputs-used
+    definition: A slim snapshot of the forecast for a monitoring set, including the inputs that were used to determine the continuous limits.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-snapshot-slim-inputs-used
+  - term: forecast-snapshot-detailed
+    definition: 'Object declared by the contract with fields: period-start, period-end, continuous-operating-limit, emergency-operating-limits,
+      limiting-analysis, additional-data.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-snapshot-detailed
+  - term: forecast-limit-item-detailed
+    definition: 'Object declared by the contract with fields: resource-id, periods.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limit-item-detailed
+  - term: quality-class-current-source
+    definition: This property is modeled after the Quality Class called "Current Source" in ICCP. It is used to indicate the source of the current
+      value of the proposed rating. The natural mapping of this property to the kinds of ratings or rating sources described in Order 881 is as
+      follows. | ICCP | TROLIE | --------------|-------------------- | telemetered | DLR | | calculated | AAR | | estimated | Recourse Ra
+    tags:
+    - Enumeration
+    source: openapi/trolie-openapi.yml#/components/schemas/quality-class-current-source
+  - term: input
+    definition: 'Object declared by the contract with fields: name, value, unit.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/input
+  - term: Forecasted Period
+    definition: Details a proposal that was considered by the Clearinghouse run. If `resource-id` is not provided, the ratings data is assumed
+      to be for the overall facility.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-provenance
+  - term: temporary-aar-exception-provenance
+    definition: Data structure for a temporary AAR Exception against a resource. Includes a unique ID, start and (optional) end time, and a reason.
+      May or may not include a set of values, depending on the business context in which the temporary AAR exception is used.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/temporary-aar-exception-provenance
+  - term: operator-override-limit-provenance
+    definition: Data structure for a temporary AAR Exception against a resource. Includes a unique ID, start and (optional) end time, and a reason.
+      May or may not include a set of values, depending on the business context in which the temporary AAR exception is used.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/operator-override-limit-provenance
+  - term: forecast-limits-detailed-snapshot
+    definition: A detailed snapshot of the forecast for a monitoring set. These details are meant to support analysis, archival, and troubleshooting.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-detailed-snapshot
+  - term: forecast-limits-detailed-snapshot-elide-psr
+    definition: A detailed snapshot of the forecast for a monitoring set. These details are meant to support analysis, archival, and troubleshooting.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-limits-detailed-snapshot-elide-psr
+  - term: forecast-proposal-header
+    definition: Populated by the Ratings Provider in a request to submit forecast ratings. The Clearinghouse implementation should record this
+      information, and the detail limits snapshot should should reflect the appropriate metadata from the Clearinghouse Provider's perspective.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-proposal-header
+  - term: Forecasted Period
+    definition: A Forecasted Period contains proposed limits for a power system object, e.g., a segment, that were forecasted for a particular
+      Period in a Forecast Window. The status of the proposal as determined by the Clearinghouse is also included.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-proposal
+  - term: resource-forecast-proposal
+    definition: 'Object declared by the contract with fields: resource-id, periods.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/resource-forecast-proposal
+  - term: array-max-monitored-elements_forecast-proposal
+    definition: 'Object declared by the contract with fields: proposal-header, ratings.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/array-max-monitored-elements_forecast-proposal
+  - term: forecast-proposal-slim-header
+    definition: Populated by the Ratings Provider in a request to submit forecast ratings. The Clearinghouse implementation should record this
+      information, and the detail limits snapshot should should reflect the appropriate metadata from the Clearinghouse Provider's perspective.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-proposal-slim-header
+  - term: forecast-proposal-slim
+    definition: 'Object declared by the contract with fields: proposal-header, ratings, inputs-used.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-proposal-slim
+  - term: forecast-proposal-status
+    definition: Status of the rating provider's forecast proposal relative to the current forecast window. Includes any validation errors encountered
+      while processing proposals.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/forecast-proposal-status
+  - term: real-time-proposal-status
+    definition: Status of the rating provider's real-time obligations. Includes any validation errors encountered while processing proposals.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-proposal-status
+  - term: real-time-proposal-header
+    definition: Populated by the Ratings Provider in a request to submit real-time ratings. The Clearinghouse implementation should record this
+      information, and the detail limits snapshot should should reflect the appropriate metadata from the Clearinghouse Provider's perspective.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-proposal-header
+  - term: real-time-proposal
+    definition: 'Object declared by the contract with fields: continuous-operating-limit, emergency-operating-limits, limiting-analysis, resource-id,
+      current-source, inputs-used.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-proposal
+  - term: realtime-proposal
+    definition: 'Object declared by the contract with fields: proposal-header, ratings, inputs-used.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-proposal
+  - term: real-time-proposal-slim-header
+    definition: Populated by the Ratings Provider in a request to submit real-time ratings. The Clearinghouse implementation should record this
+      information, and the detail limits snapshot should should reflect the appropriate metadata from the Clearinghouse Provider's perspective.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-proposal-slim-header
+  - term: realtime-proposal-slim
+    definition: Used to propose real-time ratings for a set of resources.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-proposal-slim
+  - term: real-time-snapshot-header
+    definition: Details about the snapshot provided by the Clearinghouse provider.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-snapshot-header
+  - term: realtime-snapshot
+    definition: 'Object declared by the contract with fields: continuous-operating-limit, emergency-operating-limits, limiting-analysis, resource-id.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-snapshot
+  - term: realtime-limits-snapshot
+    definition: A snapshot of the realtime limits for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-snapshot
+  - term: real-time-snapshot-header-elide-psr
+    definition: Details about the snapshot provided by the Clearinghouse provider.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-snapshot-header-elide-psr
+  - term: realtime-limits-snapshot-elide-psr
+    definition: A snapshot of the realtime limits for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-snapshot-elide-psr
+  - term: realtime-snapshot-detailed
+    definition: 'Object declared by the contract with fields: continuous-operating-limit, emergency-operating-limits, limiting-analysis, resource-id,
+      additional-data.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-snapshot-detailed
+  - term: real-time-provenance
+    definition: 'Object declared by the contract with fields: continuous-operating-limit, emergency-operating-limits, limiting-analysis, resource-id,
+      current-source, inputs-used, source.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/real-time-provenance
+  - term: realtime-limits-detailed-snapshot
+    definition: A snapshot of the realtime limits for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-detailed-snapshot
+  - term: realtime-limits-detailed-snapshot-elide-psr
+    definition: A snapshot of the realtime limits for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-detailed-snapshot-elide-psr
+  - term: realtime-limits-snapshot-slim
+    definition: A slim snapshot of the realtime limits for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-snapshot-slim
+  - term: realtime-limits-snapshot-slim-inputs-used
+    definition: A slim snapshot of the realtime limits for a monitoring set, including the inputs used to determine the continuous limits.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/realtime-limits-snapshot-slim-inputs-used
+  - term: seasonal-snapshot-header
+    definition: Details about the snapshot provided by the Clearinghouse provider.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/seasonal-snapshot-header
+  - term: season-name
+    definition: A name for the season
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/season-name
+  - term: day-night
+    definition: Optional label to specify if the proposed seasonal ratings schedule is meant to be used only during the day or only a night. If
+      this field is not provided, the schedule is assumed to be valid for both day and night.
+    tags:
+    - Enumeration
+    source: openapi/trolie-openapi.yml#/components/schemas/day-night
+  - term: Seasonal Rating Proposal
+    definition: Proposes the continuous and emergency ratings for the specified Season.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/seasonal-snapshot
+  - term: seasonal-rating-snapshot-item
+    definition: 'Object declared by the contract with fields: resource-id, periods.'
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/seasonal-rating-snapshot-item
+  - term: seasonal-ratings-snapshot
+    definition: A snapshot of the seasonal ratings for a monitoring set.
+    tags:
+    - Object
+    source: openapi/trolie-openapi.yml#/components/schemas/seasonal-ratings-snapshot

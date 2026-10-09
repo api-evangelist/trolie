@@ -1,0 +1,431 @@
+generated: '2026-10-09'
+method: generated
+source: openapi/trolie-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 28
+  by_action_class:
+    connected: 15
+    acting: 13
+  by_consequence:
+    read: 15
+    write: 10
+    safety-critical: 3
+  human_in_the_loop_required: 3
+operations:
+- path: /limits/forecast-snapshot
+  method: get
+  operationId: getLimitsForecastSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /limits/forecast-snapshot/{period}
+  method: get
+  operationId: getHistoricalLimitsForecastSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /limits/regional/forecast-snapshot
+  method: get
+  operationId: getRegionalLimitsForecastSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:regional-operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /limits/regional/forecast-snapshot
+  method: post
+  operationId: postRegionalLimitsForecastSnapshot
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:regional-operating-snapshot
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rating-proposals/realtime
+  method: get
+  operationId: getRealTimeProposalStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:realtime-proposals
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rating-proposals/realtime
+  method: post
+  operationId: postRealTimeProposal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:realtime-proposals
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /limits/realtime-snapshot
+  method: get
+  operationId: getRealTimeLimits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /limits/regional/realtime-snapshot
+  method: get
+  operationId: getRegionalRealTimeLimits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rating-proposals/forecast
+  method: get
+  operationId: getRatingForecastProposalStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:forecast-proposals
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rating-proposals/forecast
+  method: patch
+  operationId: patchRatingForecastProposal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:forecast-proposals
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasonal-ratings/snapshot
+  method: get
+  operationId: getSeasonalRatingsSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:operating-snapshot
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rating-proposals/seasonal
+  method: get
+  operationId: getSeasonalRatingProposalStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:seasonal-proposals
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rating-proposals/seasonal
+  method: patch
+  operationId: patchSeasonalRatingsProposal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:seasonal-proposals
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasonal-overrides
+  method: get
+  operationId: getSeasonalOverrides
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:seasonal-overrides
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasonal-overrides
+  method: post
+  operationId: createSeasonalOverride
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - write:seasonal-overrides
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /seasonal-overrides/{id}
+  method: get
+  operationId: getSeasonalOverride
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:seasonal-overrides
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasonal-overrides/{id}
+  method: delete
+  operationId: deleteSeasonalOverride
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - write:seasonal-overrides
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /seasonal-overrides/{id}
+  method: put
+  operationId: updateSeasonalOverride
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - write:seasonal-overrides
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /temporary-aar-exceptions
+  method: get
+  operationId: getTemporaryAARExceptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:temporary-aar-exceptions
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /temporary-aar-exceptions
+  method: post
+  operationId: createTemporaryAARException
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:temporary-aar-exceptions
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /temporary-aar-exceptions/{id}
+  method: get
+  operationId: getTemporaryAARException
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:temporary-aar-exceptions
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /temporary-aar-exceptions/{id}
+  method: delete
+  operationId: deleteTemporaryAARException
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:temporary-aar-exceptions
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /temporary-aar-exceptions/{id}
+  method: put
+  operationId: updateTemporaryAARException
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:temporary-aar-exceptions
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /monitoring-sets
+  method: post
+  operationId: createMonitoringSet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:monitoring-sets
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /monitoring-sets/{id}
+  method: get
+  operationId: getMonitoringSet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:monitoring-sets
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /monitoring-sets/{id}
+  method: put
+  operationId: updateMonitoringSet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:monitoring-sets
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /monitoring-sets/{id}
+  method: delete
+  operationId: deleteMonitoringSet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:monitoring-sets
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /default-monitoring-set
+  method: get
+  operationId: getDefaultMonitoringSet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:monitoring-sets
+    token:
+      max-ttl: 3600
+    audit: none

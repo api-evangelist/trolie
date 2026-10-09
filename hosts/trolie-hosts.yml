@@ -1,0 +1,95 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 2
+  other_domain: 3
+  platform: 1
+  roles:
+  - api
+  - other
+  - source
+  - support
+  - website
+hosts:
+- host: api.lfenergy.org
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: lfenergy.org
+  role: api
+  relation: other-domain
+- host: api.trolie.energy
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: trolie.energy
+  role: api
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - SpectralRules
+  - GitHubOrganization
+  - GitHubRepository
+  - ChangeLog
+  - Issues
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: lfenergy.org
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Foundation
+  serves: []
+  registrable_domain: lfenergy.org
+  role: other
+  relation: other-domain
+- host: lists.lfenergy.org
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: lfenergy.org
+  role: support
+  relation: other-domain
+- host: trolie.energy
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - APIReference
+  - GettingStarted
+  - UsageExamples
+  - FAQ
+  - Blog
+  serves:
+  - docs
+  - spec
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: trolie.energy
+  role: website
+  relation: own

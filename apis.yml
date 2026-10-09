@@ -1,23 +1,355 @@
 aid: trolie
+
 name: TROLIE
-description: 'TROLIE is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: TROLIE (Transmission Ratings and Operating Limits Information Exchange) is an open-source LF Energy project, hosted under LF Projects,
+  that defines an OpenAPI-based REST specification for exchanging transmission facility ratings and operating limits. It responds to FERC Order
+  881, which requires North American Transmission Owners, Transmission Operators, Transmission Providers and Reliability Coordinators to exchange
+  ambient-adjusted and forecasted ratings. The project publishes the 1.0 specification, usage examples for forecast, real-time, seasonal and temporary
+  ratings, decision records, a conformance suite and a Java client SDK on GitHub.
+
 url: https://raw.githubusercontent.com/api-evangelist/trolie/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
 tags:
 - Company
-apis: []
+- Energy
+- Electric Grid
+- Transmission
+- Open Standards
+- OpenAPI
+- LF Energy
+- Open Source
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://trolie.energy/images/TROLIE-icon-white.svg
+
 common:
+- type: AgenticAccess
+  url: agentic-access/trolie-agentic-access.yml
+- type: Spectral
+  url: rules/trolie-spec-spectral-rules.yml
+- type: Spectral
+  url: rules/trolie-rules.yml
+- type: JSONLD
+  url: json-ld/trolie-context.jsonld
+- type: Vocabulary
+  url: vocabulary/trolie-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/trolie-data-model.yml
+- type: ChangeLog
+  url: changelog/trolie-changelog.yml
+- type: Conventions
+  url: conventions/trolie-conventions.yml
+- type: Deprecation
+  url: lifecycle/trolie-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/trolie-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/trolie-problem-types.yml
+- type: Conformance
+  url: conformance/trolie-conformance.yml
+- type: Overlay
+  url: overlays/trolie-openapi-overlay.yaml
+- type: WellKnown
+  url: well-known/trolie-well-known.yml
+- type: Hosts
+  url: hosts/trolie-hosts.yml
+- type: Vendors
+  url: vendors/trolie-vendors.yml
+- type: SDKs
+  url: packages/trolie-packages.yml
+- type: Packages
+  url: packages/trolie-packages.yml
+- type: Authentication
+  url: authentication/trolie-authentication.yml
+- type: OAuthScopes
+  url: scopes/trolie-scopes.yml
+- type: DomainSecurity
+  url: security/trolie-domain-security.yml
 - type: Website
   url: https://trolie.energy/
+- type: SpectralRules
+  url: https://github.com/trolie/spec/blob/39741d03365cb430ab5d7e677312759a7f4a6d14/.spectral.yaml
+- type: APIReference
+  url: https://trolie.energy/spec-1.0
+- type: GettingStarted
+  url: https://trolie.energy/concepts.html
+- type: UsageExamples
+  url: https://trolie.energy/usage-examples.html
+- type: FAQ
+  url: https://trolie.energy/faq.html
+- type: Blog
+  url: https://trolie.energy/community_events.html
+- type: GitHubOrganization
+  url: https://github.com/trolie
+- type: GitHubRepository
+  url: https://github.com/TROLIE/spec
+- type: ChangeLog
+  url: https://github.com/trolie/spec/releases
+- type: Issues
+  url: https://github.com/trolie/spec/issues
+- type: Support
+  url: https://lists.lfenergy.org/g/trolie-general
+- type: Foundation
+  url: https://lfenergy.org/projects/trolie/
+
+apis:
+- aid: trolie:trolie-forecasting-api
+  name: TROLIE Forecasting API
+  description: >-
+    The Forecasting API operations define the exchange of forecasted ratings,
+
+    including the 240-hour-ahead forecasted AAR data exchange required by FERC
+
+    Order 881.  The operations support submitting rating proposals, querying
+
+    in-use limits, and monitoring the health and validity of submissions
+
+    against the Rating Provider's obligations.
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Forecasting
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-forecasting-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+- aid: trolie:trolie-monitoring-sets-api
+  name: TROLIE Monitoring Sets API
+  description: >-
+    [Monitoring Sets](https://trolie.energy/concepts#monitoring-sets) are
+
+    named sets of power system resources that may be used to filter ratings
+
+    and limits returned by queries against these APIs. How Monitoring Sets are
+
+    defined is beyond the scope of the TROLIE specification, and it is assumed
+
+    that the sender and receiver have predefined the appropriate Monitoring
+
+    Sets.
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Monitoring Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-monitoring-sets-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+- aid: trolie:trolie-seasonal-api
+  name: TROLIE Seasonal API
+  description: >-
+    Seasonal ratings are static ratings associated with extended durations,
+
+    typically months. These are typically used in both planning and
+
+    operations.
+
+
+    Power system resources that are exempt from providing AARs generally
+
+    operate at a seasonal rating. Even for resources using dynamic ratings, a
+
+    seasonal rating is still necessary. This acts as a recourse when a dynamic
+
+    rating is unavailable.  For example, a dynamic rating
+
+    might be unavailable during communication outages or for forecasts beyond
+
+    the ten-day period required by FERC Order 881.
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Seasonal
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-seasonal-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+- aid: trolie:trolie-seasonal-overrides-api
+  name: TROLIE Seasonal Overrides API
+  description: >-
+    A Seasonal Override instructs the system to use a temporary static rating
+
+    instead of any concurrent Seasonal Rating for a resource.
+
+
+    A typical use case is a so-called 'de-rate' due to a temporary clearance
+
+    issue for a transmission facility that is exempt from providing AARs.
+
+
+    Exempt facilities typically operate at a seasonal rating. However, instead
+
+    of updating the seasonal rating schedule, a Ratings Provider can send a
+
+    Seasonal Override.
+
+
+    During the override period, the Clearinghouse uses the Seasonal
+
+    Override rating instead of any scheduled seasonal ratings.
+
+
+    For resources required to provide AARs, a Ratings Provider would issue a
+
+    Temporary AAR Exception to address temporary conditions requiring a static
+
+    rating.
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Seasonal Overrides
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-seasonal-overrides-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+- aid: trolie:trolie-temporary-aar-exceptions-api
+  name: TROLIE Temporary AAR Exceptions API
+  description: "A [Temporary AAR Exception](https://trolie.energy/concepts#temporary-aar-exception) is\n\
+    provided by the Ratings Provider when a Ratings Obligation cannot be\nfulfilled, due to some temporary\
+    \ operating condition impacting the related\npower system resource.  This could occur in various scenarios:\n\
+    \n  * An equipment failure.\n  * An unforeseen condition on a related part of the power grid.\n  *\
+    \ Some ambient condition that is not part of the model is heating the\n    line, like a wildfire.\n\
+    \  * Something in the surrounding environment is affecting the amount that a\n    line is allowed\
+    \ to sag. For example, this may occur for lines over\n    rivers when very large ships pass under\
+    \ them\n\nA Temporary AAR Exception serves two main purposes: documenting the reason\nfor the exception\
+    \ and providing a temporary rating value set. It is employed\nin three distinct circumstances:\n\n\
+    1. Firstly, Order 881 mandates documentation and archival of all use of\n alternate ratings in lieu\
+    \ of AARs. Ratings Providers should continue to\n provide real-time and forecast ratings for the affected\
+    \ resource, but\n these should match the rating provided with the Temporary AAR Exception\n while\
+    \ the latter is in effect. This temporary rating, and the reason that\n it occurred, must be captured\
+    \ in history regardless of the provided\n ratings.  The reason and the end date of the effective window\
+    \ may be\n updated after the object has been created, up to a configurable threshold.\n\n   If the\
+    \ Ratings Providers provides ratings that deviate from the static\n   Temporary AAR Exception rating,\
+    \ the Clearinghouse Provider must decide\n   whether to use those or the static rating. The Clearinghouse\
+    \ Provider\n   advise its Ratings Providers on how it will choose ahead of time. This\n   specification\
+    \ recommends using the dynamic rating provided, but it does\n   not mandate it.\n\n2. Secondly, Temporary\
+    \ AAR Exceptions apply when the Clearinghouse\n  Provider is generating forecast rating proposals\
+    \ on behalf of the Ratings Provider, e.g., when lookup tables are provided ahead of time by the Ratings\
+    \ Provider.\n  Since there is no external ratings, the Clearinghouse Provider\n  wouldn't otherwise\
+    \ know that a temporary static rating is needed. \n\n3. Finally, for facilities where dynamic ratings\
+    \ are provided, it is\n  possible that a communications outage or other issue could prevent the\n\
+    \  Clearinghouse Provider from receiving the dynamic ratings. In this case,\n  the Clearinghouse Provider\
+    \ would use a Temporary AAR Exception rating."
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Temporary AAR Exceptions
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-temporary-aar-exceptions-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+- aid: trolie:trolie-realtime-api
+  name: TROLIE Realtime API
+  description: >-
+    If permitted by the Clearinghouse Provider, its Ratings Providers can use
+
+    these functions to exchange real-time ratings, supplementing or replacing
+
+    traditional telemetry protocols like ICCP.
+  humanURL: https://trolie.energy/spec-1.0
+  tags:
+  - Realtime
+  properties:
+  - type: OpenAPI
+    url: openapi/trolie-realtime-api-openapi.yml
+  - type: Documentation
+    url: https://trolie.energy/spec-1.0
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-real-time-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-seasonal-ratings-proposal-status-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-proposal-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-forecast-limits-snapshot-slim-inputs-used-schema.json
+  - type: JSONSchema
+    url: json-schema/trolie-realtime-limits-snapshot-slim-inputs-used-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 43
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

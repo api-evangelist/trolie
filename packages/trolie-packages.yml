@@ -1,0 +1,33 @@
+generated: '2026-10-09'
+method: searched
+source: https://repo1.maven.org/maven2/energy/trolie/
+name: TROLIE Packages
+description: First-party client libraries published by the TROLIE project (github.com/trolie). Versions read from Maven Central maven-metadata.xml; publish date from the Last-Modified header of the release POM.
+packages:
+- name: energy.trolie:java-client
+  registry: maven
+  url: https://repo1.maven.org/maven2/energy/trolie/java-client/
+  language: Java
+  official: true
+  version: 1.4.0
+  published: '2026-09-04'
+  source_repository: https://github.com/trolie/java-client-sdk
+  docs: https://trolie.github.io/java-client-sdk/
+  note: TROLIE Java Client SDK; README states it also provides extensions for ISO/RC-specific behaviors such as SPP Two-Factor Authentication. GitHub release v1.4.0 dated 2026-09-04.
+- name: energy.trolie:java-client-examples
+  registry: maven
+  url: https://repo1.maven.org/maven2/energy/trolie/java-client-examples/
+  language: Java
+  official: true
+  version: 1.4.0
+  published: '2026-09-04'
+  source_repository: https://github.com/trolie/java-client-sdk
+  note: Usage examples module of the Java Client SDK (lastUpdated 20260904 in maven-metadata.xml).
+- name: trolie/conformance
+  registry: github
+  url: https://github.com/trolie/conformance
+  language: Python
+  official: true
+  version: null
+  published: null
+  note: TROLIE 1.0 Conformance Suite (pytest-bdd / Gherkin) distributed as a GitHub repository only; no registry package and no tagged release found. Last push 2026-05-06.

@@ -1,0 +1,322 @@
+{
+  "@context": {
+    "@vocab": "https://trolie.energy/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "trolie": "https://trolie.energy/schema#",
+    "problem": "trolie:problem",
+    "type": {
+      "@id": "trolie:type",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "trolie:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "trolie:status",
+      "@type": "xsd:decimal"
+    },
+    "detail": {
+      "@id": "trolie:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "trolie:instance",
+      "@type": "xsd:string"
+    },
+    "data-provenance": "trolie:data-provenance",
+    "provider": {
+      "@id": "trolie:provider",
+      "@type": "@id"
+    },
+    "last-updated": {
+      "@id": "trolie:last-updated",
+      "@type": "@id"
+    },
+    "origin-id": {
+      "@id": "trolie:origin-id",
+      "@type": "@id"
+    },
+    "limiting-analysis": "trolie:limiting-analysis",
+    "names": "trolie:names",
+    "resource-id": {
+      "@id": "trolie:resource-id",
+      "@type": "@id"
+    },
+    "alternate-identifiers": {
+      "@id": "trolie:alternate-identifiers",
+      "@container": "@list"
+    },
+    "forecast-snapshot-header": "trolie:forecast-snapshot-header",
+    "source": {
+      "@id": "trolie:source",
+      "@type": "@id"
+    },
+    "default-emergency-durations": {
+      "@id": "trolie:default-emergency-durations",
+      "@type": "@id"
+    },
+    "default-limiting-analysis": {
+      "@id": "trolie:default-limiting-analysis",
+      "@type": "@id"
+    },
+    "begins": {
+      "@id": "trolie:begins",
+      "@type": "xsd:dateTime"
+    },
+    "power-system-resources": {
+      "@id": "trolie:power-system-resources",
+      "@type": "@id"
+    },
+    "active-power": "trolie:active-power",
+    "mw": {
+      "@id": "trolie:mw",
+      "@type": "xsd:decimal"
+    },
+    "kV": {
+      "@id": "trolie:kV",
+      "@type": "xsd:decimal"
+    },
+    "active-power-with-power-factor": "trolie:active-power-with-power-factor",
+    "pf": {
+      "@id": "trolie:pf",
+      "@type": "xsd:decimal"
+    },
+    "apparent-power": "trolie:apparent-power",
+    "mva": {
+      "@id": "trolie:mva",
+      "@type": "xsd:decimal"
+    },
+    "current": "trolie:current",
+    "amps": {
+      "@id": "trolie:amps",
+      "@type": "xsd:decimal"
+    },
+    "reactive-power": "trolie:reactive-power",
+    "mvar": {
+      "@id": "trolie:mvar",
+      "@type": "xsd:decimal"
+    },
+    "overvoltage-threshold-pu": "trolie:overvoltage-threshold-pu",
+    "voltage-pu-max": {
+      "@id": "trolie:voltage-pu-max",
+      "@type": "xsd:decimal"
+    },
+    "overvoltage-threshold": "trolie:overvoltage-threshold",
+    "kV-max": {
+      "@id": "trolie:kV-max",
+      "@type": "xsd:decimal"
+    },
+    "undervoltage-threshold-pu": "trolie:undervoltage-threshold-pu",
+    "voltage-pu-min": {
+      "@id": "trolie:voltage-pu-min",
+      "@type": "xsd:decimal"
+    },
+    "undervoltage-threshold": "trolie:undervoltage-threshold",
+    "kV-min": {
+      "@id": "trolie:kV-min",
+      "@type": "xsd:decimal"
+    },
+    "forecast-snapshot": "trolie:forecast-snapshot",
+    "period-start": {
+      "@id": "trolie:period-start",
+      "@type": "@id"
+    },
+    "period-end": {
+      "@id": "trolie:period-end",
+      "@type": "@id"
+    },
+    "continuous-operating-limit": {
+      "@id": "trolie:continuous-operating-limit",
+      "@type": "@id"
+    },
+    "emergency-operating-limits": {
+      "@id": "trolie:emergency-operating-limits",
+      "@type": "@id"
+    },
+    "forecast-limit-item": "trolie:forecast-limit-item",
+    "periods": {
+      "@id": "trolie:periods",
+      "@container": "@list"
+    },
+    "forecast-limits-snapshot": "trolie:forecast-limits-snapshot",
+    "snapshot-header": {
+      "@id": "trolie:snapshot-header",
+      "@type": "@id"
+    },
+    "limits": {
+      "@id": "trolie:limits",
+      "@container": "@list"
+    },
+    "forecast-snapshot-header-elide-psr": "trolie:forecast-snapshot-header-elide-psr",
+    "forecast-limits-snapshot-elide-psr": "trolie:forecast-limits-snapshot-elide-psr",
+    "forecast-snapshot-slim-header": "trolie:forecast-snapshot-slim-header",
+    "ends": {
+      "@id": "trolie:ends",
+      "@type": "xsd:dateTime"
+    },
+    "forecast-limits-snapshot-slim": "trolie:forecast-limits-snapshot-slim",
+    "forecast-limits-snapshot-slim-inputs-used": "trolie:forecast-limits-snapshot-slim-inputs-used",
+    "inputs-used": {
+      "@id": "trolie:inputs-used",
+      "@container": "@list"
+    },
+    "forecast-snapshot-detailed": "trolie:forecast-snapshot-detailed",
+    "additional-data": {
+      "@id": "trolie:additional-data"
+    },
+    "forecast-limit-item-detailed": "trolie:forecast-limit-item-detailed",
+    "quality-class-current-source": "trolie:quality-class-current-source",
+    "input": "trolie:input",
+    "name": {
+      "@id": "trolie:name",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "trolie:value"
+    },
+    "unit": {
+      "@id": "trolie:unit",
+      "@type": "xsd:string"
+    },
+    "forecast-provenance": "trolie:forecast-provenance",
+    "current-source": {
+      "@id": "trolie:current-source",
+      "@type": "@id"
+    },
+    "temporary-aar-exception-provenance": "trolie:temporary-aar-exception-provenance",
+    "resource": {
+      "@id": "trolie:resource",
+      "@type": "@id"
+    },
+    "start-time": {
+      "@id": "trolie:start-time",
+      "@type": "@id"
+    },
+    "end-time": {
+      "@id": "trolie:end-time",
+      "@type": "@id"
+    },
+    "reason": {
+      "@id": "trolie:reason",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "trolie:id",
+      "@type": "@id"
+    },
+    "operator-override-limit-provenance": "trolie:operator-override-limit-provenance",
+    "forecast-limits-detailed-snapshot": "trolie:forecast-limits-detailed-snapshot",
+    "provenance": {
+      "@id": "trolie:provenance",
+      "@container": "@list"
+    },
+    "forecast-limits-detailed-snapshot-elide-psr": "trolie:forecast-limits-detailed-snapshot-elide-psr",
+    "forecast-proposal-header": "trolie:forecast-proposal-header",
+    "forecast-proposal": "trolie:forecast-proposal",
+    "resource-forecast-proposal": "trolie:resource-forecast-proposal",
+    "array-max-monitored-elements_forecast-proposal": "trolie:array-max-monitored-elements_forecast-proposal",
+    "proposal-header": {
+      "@id": "trolie:proposal-header",
+      "@type": "@id"
+    },
+    "ratings": {
+      "@id": "trolie:ratings",
+      "@container": "@list"
+    },
+    "forecast-proposal-slim-header": "trolie:forecast-proposal-slim-header",
+    "forecast-proposal-slim": "trolie:forecast-proposal-slim",
+    "forecast-proposal-status": "trolie:forecast-proposal-status",
+    "incomplete-obligation-count": {
+      "@id": "trolie:incomplete-obligation-count",
+      "@type": "xsd:integer"
+    },
+    "incomplete-obligations": {
+      "@id": "trolie:incomplete-obligations",
+      "@container": "@list"
+    },
+    "invalid-proposal-count": {
+      "@id": "trolie:invalid-proposal-count",
+      "@type": "xsd:integer"
+    },
+    "proposal-validation-errors": {
+      "@id": "trolie:proposal-validation-errors",
+      "@container": "@list"
+    },
+    "real-time-proposal-status": "trolie:real-time-proposal-status",
+    "real-time-proposal-header": "trolie:real-time-proposal-header",
+    "real-time-proposal": "trolie:real-time-proposal",
+    "realtime-proposal": "trolie:realtime-proposal",
+    "real-time-proposal-slim-header": "trolie:real-time-proposal-slim-header",
+    "realtime-proposal-slim": "trolie:realtime-proposal-slim",
+    "real-time-snapshot-header": "trolie:real-time-snapshot-header",
+    "realtime-snapshot": "trolie:realtime-snapshot",
+    "realtime-limits-snapshot": "trolie:realtime-limits-snapshot",
+    "real-time-snapshot-header-elide-psr": "trolie:real-time-snapshot-header-elide-psr",
+    "realtime-limits-snapshot-elide-psr": "trolie:realtime-limits-snapshot-elide-psr",
+    "realtime-snapshot-detailed": "trolie:realtime-snapshot-detailed",
+    "real-time-provenance": "trolie:real-time-provenance",
+    "realtime-limits-detailed-snapshot": "trolie:realtime-limits-detailed-snapshot",
+    "realtime-limits-detailed-snapshot-elide-psr": "trolie:realtime-limits-detailed-snapshot-elide-psr",
+    "realtime-limits-snapshot-slim": "trolie:realtime-limits-snapshot-slim",
+    "realtime-limits-snapshot-slim-inputs-used": "trolie:realtime-limits-snapshot-slim-inputs-used",
+    "seasonal-snapshot-header": "trolie:seasonal-snapshot-header",
+    "day-night": "trolie:day-night",
+    "seasonal-snapshot": "trolie:seasonal-snapshot",
+    "season-name": {
+      "@id": "trolie:season-name",
+      "@type": "@id"
+    },
+    "seasonal-rating-snapshot-item": "trolie:seasonal-rating-snapshot-item",
+    "seasonal-ratings-snapshot": "trolie:seasonal-ratings-snapshot",
+    "seasonal-proposal-considered": "trolie:seasonal-proposal-considered",
+    "seasonal-rating-snapshot-provenance-item": "trolie:seasonal-rating-snapshot-provenance-item",
+    "proposals-considered": {
+      "@id": "trolie:proposals-considered",
+      "@type": "@id"
+    },
+    "seasonal-ratings-snapshot-detailed": "trolie:seasonal-ratings-snapshot-detailed",
+    "seasonal-snapshot-header-elide-psr": "trolie:seasonal-snapshot-header-elide-psr",
+    "seasonal-ratings-snapshot-detailed-elide-psr": "trolie:seasonal-ratings-snapshot-detailed-elide-psr",
+    "season": "trolie:season",
+    "missing-seasonal-obligation": "trolie:missing-seasonal-obligation",
+    "obligation-period-begins": {
+      "@id": "trolie:obligation-period-begins",
+      "@type": "@id"
+    },
+    "obligation-period-ends": {
+      "@id": "trolie:obligation-period-ends",
+      "@type": "@id"
+    },
+    "seasonal-ratings-proposal-status": "trolie:seasonal-ratings-proposal-status",
+    "seasonal-proposal-header": "trolie:seasonal-proposal-header",
+    "seasonal-proposal": "trolie:seasonal-proposal",
+    "seasonal-proposals": "trolie:seasonal-proposals",
+    "seasonal-ratings-proposal": "trolie:seasonal-ratings-proposal",
+    "seasonal-proposal-header-slim": "trolie:seasonal-proposal-header-slim",
+    "default-seasonal-schedule": {
+      "@id": "trolie:default-seasonal-schedule"
+    },
+    "seasonal-ratings-proposal-slim": "trolie:seasonal-ratings-proposal-slim",
+    "seasonal-override": "trolie:seasonal-override",
+    "seasonal-override-request": "trolie:seasonal-override-request",
+    "temporary-aar-exception": "trolie:temporary-aar-exception",
+    "temporary-aar-exception-request": "trolie:temporary-aar-exception-request",
+    "request": "trolie:request",
+    "description": {
+      "@id": "trolie:description",
+      "@type": "xsd:string"
+    },
+    "response": "trolie:response",
+    "response_v2": "trolie:response_v2"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "TROLIE API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects TROLIE's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/trolie-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/trolie-openapi.yml"
+  ]
+}

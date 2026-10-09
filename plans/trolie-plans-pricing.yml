@@ -1,0 +1,12 @@
+generated: '2026-10-09'
+method: none
+source: https://trolie.energy/
+name: TROLIE Plans
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  delivery: unclear
+note: TROLIE is an open community specification hosted by LF Energy, not a hosted service; trolie.energy and github.com/trolie publish no pricing or plans. Implementations are operated by individual Reliability Coordinators / Transmission Providers.

@@ -1,0 +1,22 @@
+{
+    "linkset": [
+        {
+            "anchor": "https://lfenergy.org/wp-json/",
+            "service-desc": [
+                {
+                    "href": "https://lfenergy.org/wp-json/"
+                }
+            ],
+            "service-doc": [
+                {
+                    "href": "https://developer.wordpress.org/rest-api/"
+                }
+            ],
+            "status": [
+                {
+                    "href": "https://lfenergy.org"
+                }
+            ]
+        }
+    ]
+}

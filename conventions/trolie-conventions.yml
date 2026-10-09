@@ -1,0 +1,55 @@
+generated: '2026-10-09'
+method: searched
+source: https://trolie.energy/spec-1.0
+description: Cross-cutting conventions of the TROLIE 1.0 specification, read from the spec (openapi/trolie-openapi.yml) and the trolie.energy decision records and articles.
+base_url: null
+base_url_note: Open standard; servers[] uses the placeholder https://trolie.example.com and each implementer hosts its own server.
+api_style: REST (OpenAPI 3.0.3), JSON with vendor media types application/vnd.trolie.*.v1+json
+authentication:
+  style: OAuth 2.0 client credentials (oauth2-primary-flow), "Support RFC8725 JWT tokens."
+  scopes: scopes/trolie-scopes.yml
+  details: authentication/trolie-authentication.yml
+idempotency:
+  coverage: none
+  mechanism: null
+  note: No Idempotency-Key header or replay-protection mechanism is defined. PUT/DELETE on seasonal overrides, temporary AAR exceptions and monitoring sets are idempotent by HTTP method semantics only; POST creates (createSeasonalOverride, createTemporaryAARException, createMonitoringSet, postRealTimeProposal, postRegionalLimitsForecastSnapshot) carry no key.
+pagination:
+  style: none
+  note: Snapshots are returned whole; collection and snapshot operations are filtered by query parameters (resource-id-filter, query-filter, period-start/offset-period-start, period-end, static-only, temporal-resolution) rather than paginated.
+conditional_requests:
+  mechanism: ETag / If-None-Match (Conditional GET), 304 Not Modified
+  requirement: '"TROLIE implementations MUST support the Conditional GET pattern and clients should use it to determine when limits snapshots are available."'
+  docs: https://trolie.energy/articles/conditional-GET
+field_expansion:
+  style: slim media types
+  note: '"slim" media types (e.g. application/vnd.trolie.forecast-limits-snapshot-slim.v1+json) require the limit-type media type parameter.'
+  docs: https://trolie.energy/example-narratives/using-slim-media-types
+versioning:
+  style: SemVer API version plus major-versioned media types (content negotiation via Accept / Content-Type)
+  docs: https://trolie.energy/decision-log/media-type-versioning
+  lifecycle: lifecycle/trolie-lifecycle.yml
+error_envelope:
+  format: application/problem+json
+  note: 400, 406, 409, 410, 415 and 422 responses use application/problem+json; 401, 403, 404, 413, 429 and 500 are defined as empty-body responses.
+rate_limits:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After]
+  exhaustion_status: 429
+  details: rate-limits/trolie-rate-limits.yml
+request_tracing: null
+reversibility:
+  status: documented
+  note: Reversal paths exist as DELETE/PUT operations on the resources a client creates; no reversal window is stated in the spec or docs. Rating proposals and regional forecast snapshot posts have no documented reversal operation.
+  surfaces:
+  - write: createSeasonalOverride
+    reversal: deleteSeasonalOverride
+    also: updateSeasonalOverride
+    window: null
+  - write: createTemporaryAARException
+    reversal: deleteTemporaryAARException
+    also: updateTemporaryAARException
+    window: null
+  - write: createMonitoringSet
+    reversal: deleteMonitoringSet
+    also: updateMonitoringSet
+    window: null
+  docs: https://trolie.energy/spec-1.0

@@ -1,0 +1,53 @@
+generated: '2026-10-09'
+method: generated
+source: openapi/trolie-openapi.yml; no provider-published skills or AGENTS.md found (https://trolie.energy/AGENTS.md 404, 2026-10-09)
+skills:
+- file: trolie-manage-monitoring-sets.md
+  name: manage-monitoring-sets
+  api: openapi/trolie-openapi.yml
+  operations:
+  - createMonitoringSet
+  - getMonitoringSet
+  - updateMonitoringSet
+  - deleteMonitoringSet
+  - getDefaultMonitoringSet
+- file: trolie-manage-seasonal-overrides.md
+  name: manage-seasonal-overrides
+  api: openapi/trolie-openapi.yml
+  operations:
+  - createSeasonalOverride
+  - getSeasonalOverrides
+  - getSeasonalOverride
+  - updateSeasonalOverride
+  - deleteSeasonalOverride
+- file: trolie-manage-temporary-aar-exceptions.md
+  name: manage-temporary-aar-exceptions
+  api: openapi/trolie-openapi.yml
+  operations:
+  - createTemporaryAARException
+  - getTemporaryAARExceptions
+  - getTemporaryAARException
+  - updateTemporaryAARException
+  - deleteTemporaryAARException
+- file: trolie-submit-forecast-rating-proposal.md
+  name: submit-forecast-rating-proposal
+  api: openapi/trolie-openapi.yml
+  operations:
+  - patchRatingForecastProposal
+  - getRatingForecastProposalStatus
+  - getLimitsForecastSnapshot
+- file: trolie-submit-real-time-rating-proposal.md
+  name: submit-real-time-rating-proposal
+  api: openapi/trolie-openapi.yml
+  operations:
+  - postRealTimeProposal
+  - getRealTimeProposalStatus
+  - getRealTimeLimits
+  - getRegionalRealTimeLimits
+- file: trolie-submit-seasonal-ratings-proposal.md
+  name: submit-seasonal-ratings-proposal
+  api: openapi/trolie-openapi.yml
+  operations:
+  - patchSeasonalRatingsProposal
+  - getSeasonalRatingProposalStatus
+  - getSeasonalRatingsSnapshot

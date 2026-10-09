@@ -1,0 +1,56 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/trolie/spec/releases
+name: TROLIE Specification Changelog
+scheme: semver
+current_version: 1.1.0
+note: Releases of the trolie/spec repository. v1.0.0 release notes state "There will be no breaking changes going forward in the TROLIE 1.0 project"; versioning per https://trolie.energy/decision-log/media-type-versioning.
+entries:
+- version: 1.1.0
+  date: '2026-02-26'
+  breaking: false
+  highlights: []
+  url: https://github.com/trolie/spec/releases/tag/1.1.0
+  note: Release published with no release notes body.
+- version: 1.0.6
+  date: '2025-09-25'
+  breaking: false
+  highlights:
+  - Added temporal-resolution parameter on Forecasting operations so clients can request daily, weekly, monthly etc. forecasts in addition to the default hourly (issue #232).
+  url: https://github.com/trolie/spec/releases/tag/v1.0.6
+- version: 1.0.5
+  date: '2025-07-31'
+  breaking: false
+  highlights:
+  - Updated announcements; bug fixes and cleanup of limit types.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.5
+- version: 1.0.4
+  date: '2025-07-03'
+  breaking: false
+  highlights:
+  - Clarified that id parameters are opaque identifiers.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.4
+- version: 1.0.3
+  date: '2025-06-16'
+  breaking: false
+  highlights:
+  - Added time conventions article.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.3
+- version: 1.0.2
+  date: '2025-03-13'
+  breaking: false
+  highlights:
+  - Consistently capitalized ISO-NE emergency duration names in examples.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.2
+- version: 1.0.1
+  date: '2025-01-17'
+  breaking: false
+  highlights:
+  - authority (CIM naming namespace) allowed to be a generic identifier.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.1
+- version: 1.0.0
+  date: '2024-11-15'
+  breaking: false
+  highlights:
+  - Stable 1.0 specification; permanent location trolie.energy/spec-1.0; commitment to no breaking changes in the TROLIE 1.0 project.
+  url: https://github.com/trolie/spec/releases/tag/v1.0.0

@@ -1,0 +1,549 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/trolie/main/json-schema/trolie-realtime-proposal-schema.json",
+  "title": "realtime-proposal",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/trolie-openapi.yml#/components/schemas/realtime-proposal",
+  "type": "object",
+  "properties": {
+    "proposal-header": {
+      "$ref": "#/$defs/real-time-proposal-header"
+    },
+    "ratings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50000,
+      "description": "Real-Time Ratings Proposals",
+      "items": {
+        "$ref": "#/$defs/real-time-proposal"
+      }
+    },
+    "inputs-used": {
+      "description": "\nOptional list of quantities used as input to the ratings determination.\nThe particular information exchange determines which values may be expected\nas well as the conventions used to represent those values. This property\nis included to prescribe a way to include these inputs.\n",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "free-text",
+            "maxLength": 50
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50000,
+            "description": "Since this is expected to be used for wind speed or temperature, we expect an array of numbers for each resource. An empty array is used to indicate that the inputs are not available for a particular resource. This could occur if the inputs were not provided by the Ratings Provider or if a recourse rating was utilized.\n",
+            "items": {
+              "$ref": "#/$defs/resource-forecast-inputs"
+            }
+          },
+          "unit": {
+            "type": "string",
+            "description": "Since we are not specifying which inputs shall be\nprovided, we cannot specify a definitive list of units, but\nimplementors are encouraged to use UnitSymbol from CIM when\nappropriate: The CIM may not include appropriate units for\nall inputs, e.g., wind speed, degrees Fahrenheit, etc.\n",
+            "format": "unit",
+            "maxLength": 50
+          }
+        },
+        "required": [
+          "name",
+          "values",
+          "unit"
+        ]
+      }
+    }
+  },
+  "required": [
+    "proposal-header",
+    "ratings"
+  ],
+  "$defs": {
+    "active-power": {
+      "type": "object",
+      "title": "Active Power",
+      "additionalProperties": false,
+      "properties": {
+        "mw": {
+          "type": "number",
+          "description": "Active Power in megawatts",
+          "format": "float",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "kV": {
+          "description": "The voltage in kilovolts.",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1100
+        }
+      },
+      "required": [
+        "mw"
+      ]
+    },
+    "active-power-with-power-factor": {
+      "type": "object",
+      "title": "Active Power and Power Factor",
+      "additionalProperties": false,
+      "properties": {
+        "mw": {
+          "type": "number",
+          "description": "Active Power in megawatts",
+          "format": "float",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "kV": {
+          "description": "The voltage in kilovolts.",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1100
+        },
+        "pf": {
+          "type": "number",
+          "description": "Assumed power factor.",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "mw",
+        "pf"
+      ]
+    },
+    "apparent-power": {
+      "type": "object",
+      "title": "Apparent Power",
+      "additionalProperties": false,
+      "properties": {
+        "mva": {
+          "type": "number",
+          "description": "Representation of a limit in megavolt-amperes (MVA).",
+          "format": "float",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "kV": {
+          "description": "The voltage in kilovolts.",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1100
+        }
+      },
+      "required": [
+        "mva"
+      ]
+    },
+    "current": {
+      "type": "object",
+      "title": "Current",
+      "description": "Representation of a thermal limit in amperes.",
+      "additionalProperties": false,
+      "properties": {
+        "amps": {
+          "type": "number",
+          "format": "float",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "amps"
+      ]
+    },
+    "data-provenance": {
+      "type": "object",
+      "description": "\nProvides information about where the associated representation came from. *No\nfunctional aspects of the exchange are contingent upon this data.* However,\nthis information is meant to support debugging and application support use\ncases, so implementors are encouraged to provide\nmeaningful values.\n\n* `provider` identifies that entity, e.g., a Ratings Provider or Clearinghouse\n  Provider, that created the object. The `provider`'s NERC id is recommended.\n* `last-updated` indicates the wall-clock time at the `provider` when the\n  object was last modified. N.b. this is not when the message\n  describing the object was sent or received, i.e., implementors should not\n  simply insert the current timestamp here when preparing the object serialization.\n* `origin-id` is the identifier used by the `provider` to uniquely nominate\n  the object. It is recommended but not required that this be a URI.\n",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/entity"
+        },
+        "last-updated": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "origin-id": {
+          "$ref": "#/$defs/local"
+        }
+      },
+      "required": [
+        "provider",
+        "last-updated"
+      ]
+    },
+    "emergency-durations": {
+      "type": "array",
+      "description": "Defines the durations in minutes used for emergency limits.",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "A type of limit as defined in the Transmission Provider's operating manual,\nusually indicating specific scenarios under which the limit may be used as\nwell as a maximum period for which the limit may be safely applied.\n",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^[A-Za-z\\-]{3,10}$"
+          },
+          "duration-minutes": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          }
+        },
+        "required": [
+          "name",
+          "duration-minutes"
+        ]
+      }
+    },
+    "entity": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for an entity, such as a grid operator or\norganization. This identifier is typically used in the context of data\nexchange between entities.\n"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "format": "free-text",
+          "maxLength": 50
+        },
+        "value": {
+          "description": "The value of the input used in the ratings determination.\nThe type of this value is not specified, but implementors\nare encouraged to use CIM types where appropriate.\n"
+        },
+        "unit": {
+          "type": "string",
+          "description": "If the `value` is dimensionless, this property should not be\nprovided. Since we are not specifying which inputs shall be\nprovided, we cannot specify a definitive list of units, but\nimplementors are encouraged to use UnitSymbol from CIM when\nappropriate: The CIM may not include appropriate units for\nall inputs, e.g., wind speed, degrees Fahrenheit, etc.\n",
+          "format": "unit",
+          "maxLength": 50
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "limit": {
+      "type": "object",
+      "title": "Limit",
+      "description": "\nDefines the limit. In practice most exchanges will only support one kind of\nlimit for proposals and snapshots. However, the specification supports\ndefining limits on a per resource basis as well as limit types that are not\nanticipated to be used to implement Order 881. TROLIE server implementations\nmust support at least one of these limit types and should return a well known\n`application/problem+json` response if they receive a proposal in an\nunsupported but valid limit type as defined here.\n\nWhen used as the media type parameter `limit-type`, these are nominated by\nthe following names.\n\n  * `active-power`\n  * `active-power-with-power-factor`\n  * `apparent-power`\n  * `current`\n  * `reactive-power`\n  * `overvoltage-threshold-pu`\n  * `overvoltage-threshold`\n  * `undervoltage-threshold-pu`\n  * `undervoltage-threshold`\n",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/active-power"
+        },
+        {
+          "$ref": "#/$defs/active-power-with-power-factor"
+        },
+        {
+          "$ref": "#/$defs/apparent-power"
+        },
+        {
+          "$ref": "#/$defs/current"
+        },
+        {
+          "$ref": "#/$defs/reactive-power"
+        },
+        {
+          "$ref": "#/$defs/overvoltage-threshold-pu"
+        },
+        {
+          "$ref": "#/$defs/overvoltage-threshold"
+        },
+        {
+          "$ref": "#/$defs/undervoltage-threshold-pu"
+        },
+        {
+          "$ref": "#/$defs/undervoltage-threshold"
+        }
+      ]
+    },
+    "limit-value-set": {
+      "type": "array",
+      "description": "\nA set of general limit or rating values, each mapped to the various limit bands defined by the Transmission Provider's operating manual. This typically consists of a \"normal\" limit, as well as limits for various levels of emergency conditions (typically 2-4) defined in the operations manual.\n",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "description": "Operating Limit",
+        "properties": {
+          "duration-name": {
+            "description": "A type of limit as defined in the Transmission Provider's operating manual,\nusually indicating specific scenarios under which the limit may be used as\nwell as a maximum period for which the limit may be safely applied.\n",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^[A-Za-z\\-]{3,10}$"
+          },
+          "limit": {
+            "$ref": "#/$defs/limit"
+          },
+          "limiting-analysis": {
+            "$ref": "#/$defs/limiting-analysis"
+          }
+        },
+        "required": [
+          "duration-name",
+          "limit"
+        ]
+      }
+    },
+    "limiting-analysis": {
+      "type": "string",
+      "description": "\nIndicates how a operating limit was determined. This is used to\nprovide context for the ratings proposals and limits snapshots. When defined\nin the header, this is assumed to apply to any limit that does not specify its\nown limiting analysis. When defined for a period, it applies to the\n`continuous-operating-limit` as well as the associated\n`emergency-operating-limits`, unless the `emergency-operating-limits` specify\ntheir own limiting analysis.\n\nTHERMAL_RATING - The limit was determined by the thermal rating of underlying\nequipment.\n\nTRANSIENT_SECURITY_ASSESSMENT - Studies of the system's transient stability\ndetermined the limit.\n\nVOLTAGE_SECURITY_ASSESSMENT - Studies of the system's voltage stability\ndetermined the limit.\n\nSMALL_SIGNAL_STABILITY_ASSESSMENT - Small-signal stability studies determined\nthe limit.\n\nSYSTEM_SPECIFIC - This could account for limits imposed by specific system\ncharacteristics, such as the presence of sensitive loads, the need to maintain\nspecific power flows, or other reliability/volatility reasons. These include\nlimits defined by Special Protection Schemes and Remedial Action Schemes.\n\nENVIRONMENTAL_CONDITIONS - The limit was determined by exceptional\nenvironmental conditions such as wildfire risk, ice loading, excessive\nwind/galloping, or other factors.\n\nCONTRACT_CAPACITY - The available facility transfer capacity is limited\nby contractual obligations.\n\nREGULATORY_REQUIREMENTS - The limit is imposed by regulatory requirements.\n\nOTHER - The limit was determined by some other means not anticipated in this\nstandard.\n",
+      "enum": [
+        "THERMAL_RATING",
+        "TRANSIENT_SECURITY_ASSESSMENT",
+        "VOLTAGE_SECURITY_ASSESSMENT",
+        "SMALL_SIGNAL_STABILITY_ASSESSMENT",
+        "SYSTEM_SPECIFIC",
+        "ENVIRONMENTAL_CONDITIONS",
+        "REGULATORY_REQUIREMENTS",
+        "CONTRACT_CAPACITY",
+        "OTHER"
+      ]
+    },
+    "local": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a identifier that is unique for an object in the context of an\nexchange between two grid operators.\n"
+    },
+    "name-type": {
+      "description": "Type of the name being referenced.  Corresponds to the IEC CIM `NameType` concept.",
+      "type": "string",
+      "maxLength": 20,
+      "pattern": "^[A-Za-z0-9\\-]{3,20}$"
+    },
+    "named-power-system-resources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50000,
+      "description": "Collection of power system resource names",
+      "items": {
+        "$ref": "#/$defs/names"
+      }
+    },
+    "names": {
+      "type": "object",
+      "properties": {
+        "resource-id": {
+          "$ref": "#/$defs/resource-id"
+        },
+        "alternate-identifiers": {
+          "type": "array",
+          "maxItems": 10,
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/local"
+              },
+              "type": {
+                "$ref": "#/$defs/name-type"
+              },
+              "authority": {
+                "$ref": "#/$defs/entity"
+              },
+              "mrid": {
+                "$ref": "#/$defs/local"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "resource-id"
+      ]
+    },
+    "overvoltage-threshold": {
+      "type": "object",
+      "title": "Overvoltage Threshold",
+      "description": "An upper limit to voltage for a transmission facility in kilovolts.",
+      "additionalProperties": false,
+      "properties": {
+        "kV-max": {
+          "description": "The voltage in kilovolts.",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1100
+        }
+      },
+      "required": [
+        "kV-max"
+      ]
+    },
+    "overvoltage-threshold-pu": {
+      "type": "object",
+      "title": "Overvoltage Threshold per unit",
+      "description": "An upper limit to voltage for a transmission facility in per unit with the base voltage assumed to be the nominal voltage.\n",
+      "additionalProperties": false,
+      "properties": {
+        "voltage-pu-max": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 2
+        }
+      },
+      "required": [
+        "voltage-pu-max"
+      ]
+    },
+    "quality-class-current-source": {
+      "type": "string",
+      "description": "\nThis property is modeled after the Quality Class called \"Current Source\"\nin ICCP. It is used to indicate the source of the current value of the\nproposed rating. The natural mapping of this property to the kinds of ratings\nor rating sources described in Order 881 is as follows.\n\n| ICCP        | TROLIE            |\n--------------|--------------------\n| telemetered | DLR               |\n| calculated  | AAR               |\n| estimated   | Recourse Rating  / time-bound static rating |\n| manual      | Operator Override |\n",
+      "enum": [
+        "Telemetered",
+        "Calculated",
+        "Estimated",
+        "Manual"
+      ],
+      "default": "Calculated"
+    },
+    "reactive-power": {
+      "type": "object",
+      "title": "Reactive Power",
+      "description": "Representation of a limit in megavolt-amperes reactive (MVAR).",
+      "additionalProperties": false,
+      "properties": {
+        "mvar": {
+          "type": "number",
+          "format": "float",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "mvar"
+      ]
+    },
+    "real-time-proposal": {
+      "type": "object",
+      "properties": {
+        "continuous-operating-limit": {
+          "$ref": "#/$defs/limit"
+        },
+        "emergency-operating-limits": {
+          "$ref": "#/$defs/limit-value-set"
+        },
+        "limiting-analysis": {
+          "$ref": "#/$defs/limiting-analysis"
+        },
+        "resource-id": {
+          "$ref": "#/$defs/resource-id"
+        },
+        "current-source": {
+          "$ref": "#/$defs/quality-class-current-source"
+        },
+        "inputs-used": {
+          "description": "\nOptional list of quantities used as input to the ratings determination.\nThe particular information exchange determines which values may be expected\nas well as the conventions used to represent those values. This property\nis included to prescribe a way to include these inputs.\n",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/input"
+          }
+        }
+      },
+      "required": [
+        "resource-id",
+        "continuous-operating-limit",
+        "emergency-operating-limits"
+      ],
+      "additionalProperties": false
+    },
+    "real-time-proposal-header": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/data-provenance"
+        },
+        "default-emergency-durations": {
+          "$ref": "#/$defs/emergency-durations"
+        },
+        "default-limiting-analysis": {
+          "$ref": "#/$defs/limiting-analysis"
+        },
+        "power-system-resources": {
+          "$ref": "#/$defs/named-power-system-resources"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "default-emergency-durations",
+        "power-system-resources"
+      ],
+      "description": "\nPopulated by the Ratings Provider in a request to submit real-time ratings.\nThe Clearinghouse implementation should record this information,\nand the detail limits snapshot should should reflect the\nappropriate metadata from the\nClearinghouse Provider's perspective.\n"
+    },
+    "resource-forecast-inputs": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {
+        "type": "number",
+        "format": "float"
+      }
+    },
+    "resource-id": {
+      "type": "string",
+      "maxLength": 500,
+      "pattern": "^(.){0,500}$",
+      "description": "Contains a unique identifier for a power system resource, such as a\ntransmission facility, segment, interface, etc. This identifier is typically\nused between reliability coordinators in operations.\n"
+    },
+    "timestamp": {
+      "description": "RFC 3339 date-time string with a maximum of 10 digits in the fractional seconds component, i.e., nanosecond precision.",
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 35
+    },
+    "undervoltage-threshold": {
+      "type": "object",
+      "title": "Undervoltage Threshold",
+      "description": "A lower limit to voltage for a transmission facility in kilovolts.",
+      "additionalProperties": false,
+      "properties": {
+        "kV-min": {
+          "description": "The voltage in kilovolts.",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1100
+        }
+      },
+      "required": [
+        "kV-min"
+      ]
+    },
+    "undervoltage-threshold-pu": {
+      "type": "object",
+      "title": "Undervoltage Threshold per unit",
+      "description": "An lower limit to voltage for a transmission facility in per unit with the nominal voltage assumed to be the base voltage.\n",
+      "additionalProperties": false,
+      "properties": {
+        "voltage-pu-min": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 2
+        }
+      },
+      "required": [
+        "voltage-pu-min"
+      ]
+    }
+  }
+}

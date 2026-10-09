@@ -1,0 +1,272 @@
+overlay: 1.0.0
+info:
+  title: TROLIE agent-surface overlay
+  version: 1.0.0
+extends: ../openapi/_original/trolie-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/trolie-openapi.yml
+x-rationale: Binds each operation to its candidate MCP tool name, read-only flag and OAuth2 client-credentials scope (copied from the operation
+  security block). x-conditional-get marks GETs, all of which document 304 with ETag/If-None-Match in the spec. The original spec is not mutated.
+actions:
+- target: $.info
+  description: Record catalog provenance and agent-facing hints.
+  update:
+    x-apievangelist:
+      provider: trolie
+      generated: '2026-10-09'
+      mcp: mcp/trolie-mcp.yml
+      skills: skills/_index.yml
+      llms: llms/trolie-llms.txt
+- target: $.paths['/limits/forecast-snapshot'].get
+  description: Agent hints for getLimitsForecastSnapshot.
+  update:
+    x-mcp-tool:
+      name: get_limits_forecast_snapshot
+      read_only: true
+      required_scopes:
+      - read:operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/limits/forecast-snapshot/{period}'].get
+  description: Agent hints for getHistoricalLimitsForecastSnapshot.
+  update:
+    x-mcp-tool:
+      name: get_historical_limits_forecast_snapshot
+      read_only: true
+      required_scopes:
+      - read:operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/limits/regional/forecast-snapshot'].get
+  description: Agent hints for getRegionalLimitsForecastSnapshot.
+  update:
+    x-mcp-tool:
+      name: get_regional_limits_forecast_snapshot
+      read_only: true
+      required_scopes:
+      - read:regional-operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/limits/regional/forecast-snapshot'].post
+  description: Agent hints for postRegionalLimitsForecastSnapshot.
+  update:
+    x-mcp-tool:
+      name: post_regional_limits_forecast_snapshot
+      read_only: false
+      required_scopes:
+      - write:regional-operating-snapshot
+    x-conditional-get: false
+- target: $.paths['/rating-proposals/realtime'].get
+  description: Agent hints for getRealTimeProposalStatus.
+  update:
+    x-mcp-tool:
+      name: get_real_time_proposal_status
+      read_only: true
+      required_scopes:
+      - read:realtime-proposals
+    x-conditional-get: true
+- target: $.paths['/rating-proposals/realtime'].post
+  description: Agent hints for postRealTimeProposal.
+  update:
+    x-mcp-tool:
+      name: post_real_time_proposal
+      read_only: false
+      required_scopes:
+      - write:realtime-proposals
+    x-conditional-get: false
+- target: $.paths['/limits/realtime-snapshot'].get
+  description: Agent hints for getRealTimeLimits.
+  update:
+    x-mcp-tool:
+      name: get_real_time_limits
+      read_only: true
+      required_scopes:
+      - read:operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/limits/regional/realtime-snapshot'].get
+  description: Agent hints for getRegionalRealTimeLimits.
+  update:
+    x-mcp-tool:
+      name: get_regional_real_time_limits
+      read_only: true
+      required_scopes:
+      - read:operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/rating-proposals/forecast'].get
+  description: Agent hints for getRatingForecastProposalStatus.
+  update:
+    x-mcp-tool:
+      name: get_rating_forecast_proposal_status
+      read_only: true
+      required_scopes:
+      - read:forecast-proposals
+    x-conditional-get: true
+- target: $.paths['/rating-proposals/forecast'].patch
+  description: Agent hints for patchRatingForecastProposal.
+  update:
+    x-mcp-tool:
+      name: patch_rating_forecast_proposal
+      read_only: false
+      required_scopes:
+      - write:forecast-proposals
+    x-conditional-get: false
+- target: $.paths['/seasonal-ratings/snapshot'].get
+  description: Agent hints for getSeasonalRatingsSnapshot.
+  update:
+    x-mcp-tool:
+      name: get_seasonal_ratings_snapshot
+      read_only: true
+      required_scopes:
+      - read:operating-snapshot
+    x-conditional-get: true
+- target: $.paths['/rating-proposals/seasonal'].get
+  description: Agent hints for getSeasonalRatingProposalStatus.
+  update:
+    x-mcp-tool:
+      name: get_seasonal_rating_proposal_status
+      read_only: true
+      required_scopes:
+      - read:seasonal-proposals
+    x-conditional-get: true
+- target: $.paths['/rating-proposals/seasonal'].patch
+  description: Agent hints for patchSeasonalRatingsProposal.
+  update:
+    x-mcp-tool:
+      name: patch_seasonal_ratings_proposal
+      read_only: false
+      required_scopes:
+      - write:seasonal-proposals
+    x-conditional-get: false
+- target: $.paths['/seasonal-overrides'].get
+  description: Agent hints for getSeasonalOverrides.
+  update:
+    x-mcp-tool:
+      name: get_seasonal_overrides
+      read_only: true
+      required_scopes:
+      - read:seasonal-overrides
+    x-conditional-get: true
+- target: $.paths['/seasonal-overrides'].post
+  description: Agent hints for createSeasonalOverride.
+  update:
+    x-mcp-tool:
+      name: create_seasonal_override
+      read_only: false
+      required_scopes:
+      - write:seasonal-overrides
+    x-conditional-get: false
+- target: $.paths['/seasonal-overrides/{id}'].get
+  description: Agent hints for getSeasonalOverride.
+  update:
+    x-mcp-tool:
+      name: get_seasonal_override
+      read_only: true
+      required_scopes:
+      - read:seasonal-overrides
+    x-conditional-get: true
+- target: $.paths['/seasonal-overrides/{id}'].delete
+  description: Agent hints for deleteSeasonalOverride.
+  update:
+    x-mcp-tool:
+      name: delete_seasonal_override
+      read_only: false
+      required_scopes:
+      - write:seasonal-overrides
+    x-conditional-get: false
+- target: $.paths['/seasonal-overrides/{id}'].put
+  description: Agent hints for updateSeasonalOverride.
+  update:
+    x-mcp-tool:
+      name: update_seasonal_override
+      read_only: false
+      required_scopes:
+      - write:seasonal-overrides
+    x-conditional-get: false
+- target: $.paths['/temporary-aar-exceptions'].get
+  description: Agent hints for getTemporaryAARExceptions.
+  update:
+    x-mcp-tool:
+      name: get_temporary_aar_exceptions
+      read_only: true
+      required_scopes:
+      - read:temporary-aar-exceptions
+    x-conditional-get: true
+- target: $.paths['/temporary-aar-exceptions'].post
+  description: Agent hints for createTemporaryAARException.
+  update:
+    x-mcp-tool:
+      name: create_temporary_aar_exception
+      read_only: false
+      required_scopes:
+      - write:temporary-aar-exceptions
+    x-conditional-get: false
+- target: $.paths['/temporary-aar-exceptions/{id}'].get
+  description: Agent hints for getTemporaryAARException.
+  update:
+    x-mcp-tool:
+      name: get_temporary_aar_exception
+      read_only: true
+      required_scopes:
+      - read:temporary-aar-exceptions
+    x-conditional-get: true
+- target: $.paths['/temporary-aar-exceptions/{id}'].delete
+  description: Agent hints for deleteTemporaryAARException.
+  update:
+    x-mcp-tool:
+      name: delete_temporary_aar_exception
+      read_only: false
+      required_scopes:
+      - write:temporary-aar-exceptions
+    x-conditional-get: false
+- target: $.paths['/temporary-aar-exceptions/{id}'].put
+  description: Agent hints for updateTemporaryAARException.
+  update:
+    x-mcp-tool:
+      name: update_temporary_aar_exception
+      read_only: false
+      required_scopes:
+      - write:temporary-aar-exceptions
+    x-conditional-get: false
+- target: $.paths['/monitoring-sets'].post
+  description: Agent hints for createMonitoringSet.
+  update:
+    x-mcp-tool:
+      name: create_monitoring_set
+      read_only: false
+      required_scopes:
+      - write:monitoring-sets
+    x-conditional-get: false
+- target: $.paths['/monitoring-sets/{id}'].get
+  description: Agent hints for getMonitoringSet.
+  update:
+    x-mcp-tool:
+      name: get_monitoring_set
+      read_only: true
+      required_scopes:
+      - read:monitoring-sets
+    x-conditional-get: true
+- target: $.paths['/monitoring-sets/{id}'].put
+  description: Agent hints for updateMonitoringSet.
+  update:
+    x-mcp-tool:
+      name: update_monitoring_set
+      read_only: false
+      required_scopes:
+      - write:monitoring-sets
+    x-conditional-get: false
+- target: $.paths['/monitoring-sets/{id}'].delete
+  description: Agent hints for deleteMonitoringSet.
+  update:
+    x-mcp-tool:
+      name: delete_monitoring_set
+      read_only: false
+      required_scopes:
+      - write:monitoring-sets
+    x-conditional-get: false
+- target: $.paths['/default-monitoring-set'].get
+  description: Agent hints for getDefaultMonitoringSet.
+  update:
+    x-mcp-tool:
+      name: get_default_monitoring_set
+      read_only: true
+      required_scopes:
+      - read:monitoring-sets
+    x-conditional-get: true

@@ -1,0 +1,13 @@
+generated: '2026-10-09'
+method: none
+source: https://trolie.energy/spec-1.0
+name: TROLIE Rate Limits
+limit_count: 0
+limits: []
+headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+- Retry-After
+exhaustion_status: 429
+note: 'The specification publishes no numeric limits (it is an open standard; each implementing RC/TP sets its own). It does define the rate-limit signaling: every response carries X-RateLimit-Limit ("The number of allowed requests in the current period"), X-RateLimit-Remaining and X-RateLimit-Reset ("The number of seconds left in the current period"), and the 429 response ("Too many requests (rate limiting)") adds Retry-After (components/headers and components/responses/429-empty in openapi/trolie-openapi.yml).'

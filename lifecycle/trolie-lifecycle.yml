@@ -1,0 +1,18 @@
+generated: '2026-10-09'
+method: searched
+source: https://trolie.energy/decision-log/media-type-versioning
+name: TROLIE Lifecycle
+versioning:
+  scheme: semver plus versioned media types
+  policy_url: https://trolie.energy/decision-log/media-type-versioning
+  summary: 'Decision record (status: committed): "The overall TROLIE API version will follow SemVer." Operation binding (verb, path, query parameters) is versioned via the API version; request/response messages are versioned through media types (e.g. application/vnd.trolie.*.v1+json), which "will only have major versions". Additional operations or query parameters result in a minor version change.'
+  breaking_change_policy: '"there will be no breaking changes posited once 1.0.0 is declared. Accordingly, no binding information will be removed or renamed, and no request/response messages will have breaking changes."'
+  current_version: 1.1.0
+deprecation:
+  policy: '"there will only be one valid TROLIE 1.0 specification; the publishing of 1.1.0 will supersede and deprecate 1.0.0."'
+  sunset_headers: false
+  deprecated_operations: []
+  note: No operation in openapi/trolie-openapi.yml is marked deprecated. The spec defines a 410 Gone problem response that implementations MAY return for deleted or archived resources.
+status_page: null
+sla: null
+note: TROLIE is an open specification implemented by each Reliability Coordinator / Transmission Provider; there is no single hosted service, so no project status page or SLA exists.
