@@ -1,8 +1,7 @@
 {
   "provider": "trolie",
   "sources": [
-    "_original/trolie-openapi-1.0.yaml",
-    "trolie-openapi.yml"
+    "_original/trolie-openapi-1.0.yaml"
   ],
   "outputs": [
     "trolie-forecasting-api-openapi.yml",
@@ -13,21 +12,24 @@
     "trolie-temporary-aar-exceptions-api-openapi.yml"
   ],
   "archived": [
-    "archived openapi/trolie-openapi.yml"
+    "deleted 1 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
   "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "trolie-openapi-1.0.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "trolie-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "tag 'Forecasting' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "tag 'Monitoring Sets' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "tag 'Real-Time' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "tag 'Seasonal' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "tag 'Seasonal Overrides' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "tag 'Temporary AAR Exceptions' spans 2 source specs (trolie-openapi-1.0.yaml, trolie-openapi.yml): per-path servers applied",
-    "apis.yml register: written (+6 apis, 6 total)"
+    "superseded outputs removed: trolie-realtime-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 6 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/trolie-openapi.yml: archived document superseded by a larger archived document",
+    "trolie-forecasting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trolie-monitoring-sets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trolie-realtime-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trolie-seasonal-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trolie-seasonal-overrides-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trolie-temporary-aar-exceptions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
