@@ -28,6 +28,15 @@ tags:
 - Energy
 - Electric Grid
 - Transmission
+- Open Standard
+- OpenAPI
+- LF Energy
+- Open Source
+tags_raw:
+- Company
+- Energy
+- Electric Grid
+- Transmission
 - Open Standards
 - OpenAPI
 - LF Energy
@@ -329,6 +338,8 @@ apis:
     traditional telemetry protocols like ICCP.
   humanURL: https://trolie.energy/spec-1.0
   tags:
+  - Real-Time
+  tags_raw:
   - Realtime
   properties:
   - type: OpenAPI
