@@ -1,0 +1,12 @@
+{
+ "url": "https://trolie.energy/openapi-1.0.yaml",
+ "requested_url": "https://trolie.energy/openapi-1.0.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 337991,
+ "sha256": "61b4c30a4270ee75e286d24c39af4c33cd650acb2f8e3fb7b2f8bf27917325cb",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
