@@ -64,5 +64,167 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-TROLIE is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github) and added to the network as a stub for full-pipeline profiling.
-- https://trolie.energy/
+TROLIE (Transmission Ratings and Operating Limits Information Exchange) is an open-source LF Energy project, hosted under LF Projects, that defines an OpenAPI-based REST specification for exchanging transmission facility ratings and operating limits. It responds to FERC Order 881, which requires North American Transmission Owners, Transmission Operators, Transmission Providers and Reliability Coordinators to exchange ambient-adjusted and forecasted ratings. The project publishes the 1.0 specification, usage examples for forecast, real-time, seasonal and temporary ratings, decision records, a conformance suite and a Java client SDK on GitHub.
+
+**Areas:** Company · Energy · Electric Grid · Transmission · Open Standard · OpenAPI · LF Energy · Open Source
+
+## TROLIE on APIs.io
+
+Everything profiled for TROLIE is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/trolie/](https://apis.io/providers/trolie/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [TROLIE Forecasting API](https://apis.io/apis/trolie/trolie-forecasting-api/) — The Forecasting API operations define the exchange of forecasted ratings, including the 240-hour-ahead forecasted AAR data exchange required by FERC Order…
+- [TROLIE Monitoring Sets API](https://apis.io/apis/trolie/trolie-monitoring-sets-api/) — [Monitoring Sets](https://trolie.energy/concepts#monitoring-sets) are named sets of power system resources that may be used to filter ratings and limits…
+- [TROLIE Seasonal API](https://apis.io/apis/trolie/trolie-seasonal-api/) — Seasonal ratings are static ratings associated with extended durations, typically months. These are typically used in both planning and operations. Power…
+- [TROLIE Seasonal Overrides API](https://apis.io/apis/trolie/trolie-seasonal-overrides-api/) — A Seasonal Override instructs the system to use a temporary static rating instead of any concurrent Seasonal Rating for a resource. A typical use case is a…
+- [TROLIE Temporary AAR Exceptions API](https://apis.io/apis/trolie/trolie-temporary-aar-exceptions-api/) — A [Temporary AAR Exception](https://trolie.energy/concepts#temporary-aar-exception) is provided by the Ratings Provider when a Ratings Obligation cannot be…
+- [TROLIE Realtime API](https://apis.io/apis/trolie/trolie-realtime-api/) — If permitted by the Clearinghouse Provider, its Ratings Providers can use these functions to exchange real-time ratings, supplementing or replacing…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [trolie](https://apis.io/servers/trolie/trolie/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Trolie Agentic Access](https://apis.io/agentic-access/trolie/trolie-agentic-access/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [forecast-limits-snapshot-slim-inputs-used](https://apis.io/schemas/trolie/trolie-forecast-limits-snapshot-slim-inputs-used/)
+- [forecast-proposal-status](https://apis.io/schemas/trolie/trolie-forecast-proposal-status/)
+- [real-time-proposal-status](https://apis.io/schemas/trolie/trolie-real-time-proposal-status/)
+- [realtime-limits-snapshot-slim-inputs-used](https://apis.io/schemas/trolie/trolie-realtime-limits-snapshot-slim-inputs-used/)
+- [realtime-proposal](https://apis.io/schemas/trolie/trolie-realtime-proposal/)
+- [seasonal-ratings-proposal-status](https://apis.io/schemas/trolie/trolie-seasonal-ratings-proposal-status/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Trolie Context](https://apis.io/jsonld/trolie/trolie-context/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Trolie Rc A Monitoring Set](https://apis.io/examples/trolie/trolie-RC-A-monitoring-set/)
+- [Trolie Rc B Monitoring Set](https://apis.io/examples/trolie/trolie-RC-B-monitoring-set/)
+- [Trolie Compression Required](https://apis.io/examples/trolie/trolie-compression-required/)
+- [Trolie Forecast Proposal Late](https://apis.io/examples/trolie/trolie-forecast-proposal-late/)
+- [Trolie Proposal Invalid Units](https://apis.io/examples/trolie/trolie-proposal-invalid-units/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Trolie Openapi Overlay](https://apis.io/overlays/trolie/trolie-openapi-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [TROLIE API Rules](https://apis.io/rules/trolie/trolie-rules/)
+- [TROLIE — spec rules](https://apis.io/rules/trolie/trolie-spec-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Trolie Authentication](https://apis.io/security/trolie/trolie-authentication/)
+- [Trolie Domain Security](https://apis.io/security/trolie/trolie-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Trolie Scopes](https://apis.io/scopes/trolie/trolie-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Trolie Plans Pricing](https://apis.io/plans/trolie/trolie-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Trolie Rate Limits](https://apis.io/rate-limits/trolie/trolie-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://trolie.energy/)
+- [Getting started](https://trolie.energy/concepts.html)
+- [API reference](https://trolie.energy/spec-1.0)
+- [Support](https://lists.lfenergy.org/g/trolie-general)
+- [Changelog](https://github.com/trolie/spec/releases)
+- [Blog](https://trolie.energy/community_events.html)
+- [GitHub](https://github.com/trolie)
+
+## API Evangelist rating
+
+**Kin Score 43.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 67.7 |
+| Contract governance | 35.6 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 0.0 |
+
+**Agent readiness 39.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 27.9** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/trolie/](https://apis.io/providers/trolie/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TROLIE: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/trolie/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
